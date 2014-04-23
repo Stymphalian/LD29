@@ -1,9 +1,13 @@
-LUDUM DARE 29
-Morgan Killinger
-Jordan Yu
+Event: LUDUM DARE 29
+Participant 1 : Morgan Killinger
+Participant 2 : Jordan Yu
+Start Date : April 19th/2014
 
-April 19th/2014
+Language: Javascript,HTML,CSS
+Libraries: Phaser (Photonstorm)
+IDE: Brackets
+Sound: sfxr
+Arts: Graphics Gale
 
 ELLO POPPET
-
 Can you see my commit?

@@ -24,6 +24,11 @@ var Node = function(game, x, y, frame,col,row,group) {
      this.frame = this.send_direction;     
   }
   this.events.onInputDown.add(listener,this);
+   
+   game.physics.arcade.enable(this);   
+   this.body.immovable = true;
+  //this.enableBody = true;
+   //this.immovable = true;
   //this.anchor.setTo(0.5, 0.5);
   //this.animations.add('flap');
   //this.animations.play('flap', 12, true);
@@ -82,6 +87,39 @@ Node.prototype.onKilled = function() {
   //console.log('alive:', this.alive);
 };
 
+Node.prototype.getNeighbourFromSendDirection = function(direction){
+   var neighbour = null;
+   // differs depending on if going top->bottom or bottom-->top.
+   var dirs =  ["NW","NE"];
+   if( this.is_up ){
+      dirs = ["SW,SE"];
+   }
+
+   // determine the direction to send.
+   if( this.send_direction == NODE_SEND_DIRECTIONS.BOTH) {
+      if( Math.random()*5 >= 5 ){
+         neighbour = this.getNeighbour(dirs[NODE_SEND_DIRECTIONS.LEFT]);         
+      }else{
+         neighbour = this.getNeighbour(dirs[NODE_SEND_DIRECTIONS.RIGHT]);                 
+      }
+   } else {
+      neighbour = this.getNeighbour(dirs[this.send_direction]);
+   }
+   
+   // make sure a valid direction node is returned.
+   if( neighbour == null){
+      neighbour = this.getNeighbour(dirs[NODE_SEND_DIRECTIONS.LEFT]);
+      if( neighbour == null){
+         neighbour = this.getNeighbour(dirs[NODE_SEND_DIRECTIONS.RIGHT]);
+      }
+   }
+   
+   if( neighbour == null){
+      console.log("SOMETHING IS VERY VERY WRONG WITH NODE SEND DIRECTION");
+   }
+   return neighbour;   
+};
+
 Node.prototype.getNeighbour = function(direction){
    var row = this.row;
    var col = this.col;
@@ -97,5 +135,5 @@ Node.prototype.getNeighbour = function(direction){
    }
    if( row < 0 || row >= stride ){ return null;}
    if( col < 0 || col >= stride ) {return null;}
-   return this.grid[row*stride + col];   
+   return this.group.grid[row*stride + col];   
 };

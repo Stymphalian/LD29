@@ -25,9 +25,10 @@ var Player = function(game,faction,is_player) {
   // creates the this.grid, and this.grid_group properties
   this.nodegrid = new NodeGrid(this.game,is_up);      
   this.cells = this.game.add.group();
+  //this.cells.enableBody = true;
+  //this.cells.physicsBodyType = Phaser.Physics.ARCADE;
          
-   // faction specific code
-   
+   // faction specific code   
    
    this.mother = new Mother(this.game,this.nodegrid.grid[mother_pos].x,this.nodegrid.grid[mother_pos].y,0);   
    //this.mother = new Mother(this.game,100,100,0);   
@@ -38,20 +39,19 @@ var Player = function(game,faction,is_player) {
    }else {
       this.nodegrid.visible = false;
    }
-   
-   
-   
+         
    if( this.is_player == true){
       for( var i = 0; i < 10; ++i){
          this.cells.add(new Cell(this.game,
                                  this.game.world.randomX,       
                                  this.game.world.randomY,
-                                 this.cells));
+                                 this.cells,
+                                 this.faction));
          
       }      
       this.cells.setAll('target',this.mother);
-      this.cells.setAll('scale.x',0.1);
-      this.cells.setAll("scale.y", 0.1);         
+      this.cells.setAll('scale.x',0.3);
+      this.cells.setAll("scale.y", 0.3);         
    }
    
   //this.anchor.setTo(0.5, 0.5);

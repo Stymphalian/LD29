@@ -14,6 +14,11 @@ var NodeGrid = function(game,is_up) {
    x_pos = 0;
    y_pos = 0;
        
+   //this.enableBody = true;
+   //this.physicsBodyType = Phaser.Physics.ARCADE;
+   //this.immovable = true;
+   //this.game.physics.arcade.enableBody(this);
+   
    for(var row = 0; row < 6; ++row){
       x_pos = x_start;
       y_pos = y_start;

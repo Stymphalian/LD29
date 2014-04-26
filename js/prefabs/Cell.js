@@ -11,8 +11,13 @@ Phaser.Point.prototype.limit = function(high, low) {
   return this;
 };
 
-var Cell = function(game, x, y, group) {
-  Phaser.Sprite.call(this, game, x, y, 'Cell');
+var Cell = function(game, x, y, group,enemy_faction) {
+   var image = "virus";
+   if( enemy_faction == FACTION.VIRUS){
+      image  = "whitebloodcell_angry";
+   }   
+   
+  Phaser.Sprite.call(this, game, x, y,image);
   this.anchor.setTo(0.5, 0.5);
   this.group = group;
   this.game.physics.arcade.enableBody(this);
@@ -24,7 +29,8 @@ var Cell = function(game, x, y, group) {
   
   this.radius = Math.sqrt(this.height * this.height + this.width * this.width) / 2;
 
-  this.desiredSeparation = 40.0;
+  //this.desiredSeparation = 40.0;
+  this.desiredSeparation = 15.0;
   this.maxDistance = this.radius * 10.0;
   
 };

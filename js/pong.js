@@ -136,7 +136,7 @@ function pong(){
       //ball.body.maxVelocity = 1;
       //ball.body.gravity = 0;
       
-   }
+   }   
    function update(){ 
       if(  is_running && is_reset){
          // We are only in here, if someone just scored and

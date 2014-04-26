@@ -20,12 +20,11 @@ Play.prototype = {
 
 		  // add keyboard controls
 		  this.flapKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		  this.flapKey.onDown.addOnce(this.startGame, this);
+		  //this.flapKey.onDown.addOnce(this.startGame, this);
 		  //this.flapKey.onDown.add(this.bird.flap, this.bird);
 
-
 		  // add mouse/touch controls
-		  this.game.input.onDown.addOnce(this.startGame, this);
+		  //this.game.input.onDown.addOnce(this.startGame, this);
 		  //this.game.input.onDown.add(this.bird.flap, this.bird);
 
 		  // keep the spacebar from propogating up to the browser

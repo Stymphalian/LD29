@@ -17,7 +17,7 @@ Preload.prototype = {
      this.load.image("whitebloodcell_happy","resources/WBCellHappy.png");
      this.load.spritesheet("depthcharge","resources/DepthCharge.png",128,128,4);
      this.load.image("gameover","resources/gameover.png");
-     this.load.image("Node", "resources/WBCellHappy.png");
+     this.load.spritesheet("Node", "resources/node_direction.png",32,32,3);
          
 //
 //    this.load.audio('flap', 'assets/flap.wav');

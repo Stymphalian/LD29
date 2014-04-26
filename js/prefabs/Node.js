@@ -1,8 +1,24 @@
 var Node = function(game, x, y, frame,col,row,group) {
+   var SEND_DIRECTIONS = {
+      LEFT: 0,
+      RIGHT: 1,
+      BOTH: 2,
+      NUMBER_OF_DIRECTIONS: 3
+   };
+      
   Phaser.Sprite.call(this, game, x, y, 'Node', frame);
   this.col = col;
   this.row = row;  
-  this.group = group
+  this.group = group;
+  this.send_direction = SEND_DIRECTIONS.BOTH;  
+  this.frame = this.send_direction;  
+  
+  this.inputEnabled = true;    
+  function listener( sprite, pointer){
+     this.send_direction  = (this.send_direction +1 ) % SEND_DIRECTIONS.NUMBER_OF_DIRECTIONS;
+     this.frame = this.send_direction;     
+  }
+  this.events.onInputDown.add(listener,this);
   //this.anchor.setTo(0.5, 0.5);
   //this.animations.add('flap');
   //this.animations.play('flap', 12, true);
@@ -59,4 +75,22 @@ Node.prototype.onKilled = function() {
   //this.game.add.tween(this).to({angle: 90}, duration).start();
   //console.log('killed');
   //console.log('alive:', this.alive);
+};
+
+Node.prototype.getNeighbour = function(direction){
+   var row = this.row;
+   var col = this.col;
+   var stride = 6;
+   if( direction === "NE"){
+      row -=1;      
+   }else if(direction === "SE") {
+      col += 1      
+   }else if (direction === "SW"){
+      row +=1;   
+   }else if (direction === "NW"){
+      col -=1;      
+   }
+   if( row < 0 || row >= stride ){ return null;}
+   if( col < 0 || col >= stride ) {return null;}
+   return this.grid[row*stride + col];   
 };

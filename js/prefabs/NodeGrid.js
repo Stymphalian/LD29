@@ -1,12 +1,13 @@
-var NodeGrid = function(game, parent) {
-  Phaser.Group.call(this, game, parent);      
+var NodeGrid = function(game,is_up) {
+  Phaser.Group.call(this, game);      
    this.grid= [];   
+   this.is_up = is_up;
        
    var x_increment = 75; //150/2
    var y_increment = 50;
    var x_pos, y_pos;
    var x_start, y_start;
-   var new_node;
+   var new_node;   
    
    x_start = 375;
    y_start = 25;

@@ -1,21 +1,26 @@
-var Node = function(game, x, y, frame,col,row,group) {
-   var SEND_DIRECTIONS = {
+   var NODE_SEND_DIRECTIONS = {
       LEFT: 0,
       RIGHT: 1,
       BOTH: 2,
       NUMBER_OF_DIRECTIONS: 3
    };
-      
+
+var Node = function(game, x, y, frame,col,row,group) {      
   Phaser.Sprite.call(this, game, x, y, 'Node', frame);
   this.col = col;
   this.row = row;  
   this.group = group;
-  this.send_direction = SEND_DIRECTIONS.BOTH;  
+  this.send_direction = NODE_SEND_DIRECTIONS.BOTH;  
   this.frame = this.send_direction;  
+   
+   //this.anchor.setTo(0.5,0.5);
+   if( this.group.is_up === false ) {
+      this.scale.y *= -1;   
+   }
   
   this.inputEnabled = true;    
   function listener( sprite, pointer){
-     this.send_direction  = (this.send_direction +1 ) % SEND_DIRECTIONS.NUMBER_OF_DIRECTIONS;
+     this.send_direction  = (this.send_direction +1 ) % NODE_SEND_DIRECTIONS.NUMBER_OF_DIRECTIONS;
      this.frame = this.send_direction;     
   }
   this.events.onInputDown.add(listener,this);

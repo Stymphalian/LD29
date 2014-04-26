@@ -12,9 +12,13 @@ Play.prototype = {
 		  this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		  this.background = this.game.add.sprite(0,0,"play_background");
         
+       
+       this.player = new Player(this.game,FACTION.WBC,true); 
+       this.computer= new Player(this.game,FACTION.VIRUS,false);
        // creates the this.grid, and this.grid_group properties
-       this.nodegrid = new NodeGrid(this.game);
-
+       //this.nodegrid = new NodeGrid(this.game);
+       //this.nodegrid.is_up = true;
+                     
 		  this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
 		  console.log("Starting play");
 
@@ -30,13 +34,18 @@ Play.prototype = {
 		  // keep the spacebar from propogating up to the browser
 		  this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 	 },
-	 update: function() {
-
+	 update: function() {       
+       this.game.physics.arcade.collide(this.player.mother,this.player.cells,this.mother_hit,null,this);
 	 },
+    mother_hit: function(mother, cell){
+       console.log("mother hit");
+       mother.reset(this.game.world.randomX, this.game.world.randomY);
+    },
 	 shutdown: function() {
 		  this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);  
 		  this.background.destroy();
-        this.nodegrid.destroy();
+        this.player.destroy();
+        this.computer.destroy();
 	 },
 	 startGame: function() {
 		  this.game.state.start("gameover");

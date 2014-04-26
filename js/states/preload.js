@@ -18,7 +18,8 @@ Preload.prototype = {
      this.load.spritesheet("depthcharge","resources/DepthCharge.png",128,128,4);
      this.load.image("gameover","resources/gameover.png");
      this.load.spritesheet("Node", "resources/node_direction.png",32,32,3);
-         
+     
+     this.load.image("Mother","resources/WBCellHappy.png");         
 //
 //    this.load.audio('flap', 'assets/flap.wav');
 //    this.load.audio('pipeHit', 'assets/pipe-hit.wav');

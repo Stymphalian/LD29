@@ -101,3 +101,12 @@ white-blood-cell.png
 virus.png
 background.png
 
+alive,exist,visible
+
+
+keep a score?
+
+TODO LIst:
+Image that we need.
+game title logo
+start button

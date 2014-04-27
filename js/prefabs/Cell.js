@@ -12,35 +12,53 @@ Phaser.Point.prototype.limit = function(high, low) {
 };
 
 var Cell = function(game, x, y, group,faction,endurance,speed) {
+   
+   // my stuff..
    var image = "virus";
    if( faction == FACTION.WBC){
       image  = "whitebloodcell_angry";
-   }   
-   
+   }     
+  this.cell_endurance = endurance;
+  this.cell_speed = speed;  
+         
   Phaser.Sprite.call(this, game, x, y,image);
   this.anchor.setTo(0.5, 0.5);
   //this.group = group;
-   this.group = this.game.add.group();
+  this.group = this.game.add.group();
   this.game.physics.arcade.enableBody(this);
    
-  this.endurance = endurance;
-  this.jordan_speed = speed;
-     
+       
   this.maxVelocity = 50.0;
-  //this.maxForce = 10.0;
-  this.maxForce = speed;
-  this.seekForce = 0.5;
+  this.maxForce = 10.0;
+  //this.maxForce = speed;
+  //this.seekForce = 0.5;
+   
+  // x/10 = x/0.5
+  this.seekForce = 0.5 + (this.cell_speed/10)*0.5;
+  this.endurance = 10 + this.cell_endurance;
+  //this.endurance = 10;
   
   this.radius = Math.sqrt(this.height * this.height + this.width * this.width) / 2;
 
   //this.desiredSeparation = 40.0;
   this.desiredSeparation = 15.0;
   this.maxDistance = this.radius * 10.0;
-  
+      
+  this.events.onRevived.add(this.revived,this);
 };
-
 Cell.prototype = Object.create(Phaser.Sprite.prototype);
 Cell.prototype.constructor = Cell;
+
+Cell.prototype.damage = function(amount){
+   this.endurance -= amount;
+   if( this.endurance <= 0 ){
+      this.kill();  
+   }
+}
+Cell.prototype.revived = function() { 
+   this.endurance = 10 + this.cell_endurance;   
+   //this.endurance = 10;
+};
 
 Cell.prototype.update = function() {
   this.body.acceleration.setTo(0,0);
@@ -54,9 +72,9 @@ Cell.prototype.update = function() {
     seekAccel.multiply(this.seekForce, this.seekForce);
     this.applyForce(seekAccel);
   }
-  this.applyForce(this.separate());
+  //this.applyForce(this.separate());
   this.applyForce(this.align());
-  this.cohesion();
+  //this.cohesion();
   
   this.checkBorders();
   this.rotation = Math.atan2(this.body.velocity.y, this.body.velocity.x);
@@ -94,75 +112,75 @@ Cell.prototype.seek = function(target) {
   return steer;
 };
 
-Cell.prototype.lookAtClosest = function() {
-  var target = null;
-  var dist = 0;
-  this.group.forEach(function(Cell) {
-    if (Cell.body.position !== this.body.position) {
-      var distBetween = this.game.physics.arcade.distanceBetween(this, Cell);
-      if(!target ||  distBetween < dist) {
-        dist = distBetween;
-        target = Cell;
-      }
-    }
-  },this);
+//Cell.prototype.lookAtClosest = function() {
+//  var target = null;
+//  var dist = 0;
+//  this.group.forEach(function(Cell) {
+//    if (Cell.body.position !== this.body.position) {
+//      var distBetween = this.game.physics.arcade.distanceBetween(this, Cell);
+//      if(!target ||  distBetween < dist) {
+//        dist = distBetween;
+//        target = Cell;
+//      }
+//    }
+//  },this);
+//
+//  if(!!target) {
+//    this.rotation = this.game.physics.arcade.angleBetween(this, target);
+//  }
+//};
+//
+//Cell.prototype.separate = function() {
+//  var distance = new Phaser.Point();
+//  var steer = new Phaser.Point();
+//  var count = 0;
+//
+//  this.group.forEach(function(Cell) {
+//    var d = this.body.position.distance(Cell.body.position);
+//    if((d > 0) && (d < this.desiredSeparation)) {
+//      var diff = Phaser.Point.subtract(this.body.position, Cell.body.position);
+//      diff.normalize();
+//      diff.divide(d,d);
+//      steer.add(diff.x,diff.y);
+//      count++
+//    }
+//  }, this);
+//
+//  if(count > 0) {
+//    steer.divide(count, count);
+//  }
+//
+//  if(steer.getMagnitude() > 0) {
+//    steer.normalize();
+//    steer.multiply(this.maxVelocity, this.maxVelocity);
+//    steer.subtract(this.body.velocity.x, this.body.velocity.y);
+//    steer.limit(this.maxForce);
+//  }
+//
+//  return steer;
+//};
 
-  if(!!target) {
-    this.rotation = this.game.physics.arcade.angleBetween(this, target);
-  }
-};
 
-Cell.prototype.separate = function() {
-  var distance = new Phaser.Point();
-  var steer = new Phaser.Point();
-  var count = 0;
-
-  this.group.forEach(function(Cell) {
-    var d = this.body.position.distance(Cell.body.position);
-    if((d > 0) && (d < this.desiredSeparation)) {
-      var diff = Phaser.Point.subtract(this.body.position, Cell.body.position);
-      diff.normalize();
-      diff.divide(d,d);
-      steer.add(diff.x,diff.y);
-      count++
-    }
-  }, this);
-
-  if(count > 0) {
-    steer.divide(count, count);
-  }
-
-  if(steer.getMagnitude() > 0) {
-    steer.normalize();
-    steer.multiply(this.maxVelocity, this.maxVelocity);
-    steer.subtract(this.body.velocity.x, this.body.velocity.y);
-    steer.limit(this.maxForce);
-  }
-
-  return steer;
-};
-
-
-Cell.prototype.cohesion = function() {
-  
-  var sum = new Phaser.Point();
-  var steer = new Phaser.Point();
-  var count = 0;
-
-  this.group.forEach(function(Cell) {
-    var d = this.body.position.distance(Cell.body.position);
-    if ((d > 0) && d < this.maxDistance) {
-      sum.add(Cell.body.position.x, Cell.body.position.y);
-      count++;
-    }
-  }, this);
-
-  if (count > 0) {
-    sum.divide(count, count);  
-    return this.seek(sum);
-  }
-  return steer;
-};
+//Cell.prototype.cohesion = function() {
+//  
+//  var sum = new Phaser.Point();
+//  var steer = new Phaser.Point();
+//  var count = 0;
+//
+//  this.group.forEach(function(Cell) {
+//    var d = this.body.position.distance(Cell.body.position);
+//    if ((d > 0) && d < this.maxDistance) {
+//      sum.add(Cell.body.position.x, Cell.body.position.y);
+//      count++;
+//    }
+//  }, this);
+//
+//  if (count > 0) {
+//    sum.divide(count, count);  
+//    return this.seek(sum);
+//  }
+//  return steer;
+//};
 
 
 Cell.prototype.align = function() {

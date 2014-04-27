@@ -145,6 +145,7 @@ Menu.prototype = {
    
    
   startClick: function() {         
+     // preserve the player stats.
      this.game.JORDAN_PLAYER_STATS = {
         spawn_rate: this.stats.spawn_rate,
         cell_endurance: this.stats.cell_endurance,
@@ -152,17 +153,26 @@ Menu.prototype = {
         faction: this.faction
      };
      
+          
+     //setup enemy statistics ( random )
      var enemy_faction;
+     var points_left = 10;
      if( this.faction == FACTION.WBC){
          enemy_faction = FACTION.VIRUS;
      }else{
          enemy_faction = FACTION.WBC;  
-     }
+     }        
+     var spawn_rate  = this.game.rnd.integerInRange(0,points_left);
+     points_left -= spawn_rate;
+     var cell_speed = this.game.rnd.integerInRange(0,points_left);
+     points_left -= cell_speed;
+     var cell_endurance = this.game.rnd.integerInRange(0,points_left);
+     points_left -= spawn_rate;
      
      this.game.JORDAN_COMPUTER_STATS = {
-        spawn_rate: 0,
-        cell_endurance: 10,
-        cell_speed: 10,
+        spawn_rate: spawn_rate,
+        cell_endurance: cell_endurance,
+        cell_speed: cell_speed,
         faction:enemy_faction
      };
      

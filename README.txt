@@ -112,6 +112,10 @@ game title logo
 start button
 
 
+health
+speed
+cell spawn rate.
+
 attributes effects on cells
 cell fighting.
 background images.

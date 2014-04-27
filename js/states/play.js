@@ -59,12 +59,18 @@ Play.prototype = {
        this.cell_count_text.text = "Count "  + window.cell_count;
 	 },
    cell_hit_cell: function(player_cell, computer_cell){
-      player_cell.kill();
-      computer_cell.kill();         
+      var temp = player_cell.endurance;
+      player_cell.damage(computer_cell.endurance);
+      computer_cell.damage(temp);   
    },
     mother_hit: function(mother, cell){
        console.log("mother hit");
+       
+       mother.damage(cell.endurance); 
        cell.kill();
+       if( mother.endurance <= 0){
+         this.deathHandler(mother.player);
+       }
        //mother.reset(this.game.world.randomX, this.game.world.randomY);
     },
    node_hit : function(cell, node){      
@@ -91,17 +97,27 @@ Play.prototype = {
 	 checkScore: function(pipeGroup) {
 
 	 },
-	 deathHandler: function(bird, computer) {
-
+	 deathHandler: function(player){
+       if( player.is_player){
+          // show lose screen
+         console.log("You lose");   
+       }else{
+         //show victory screen  
+          console.log("You win");   
+       }
+       this.game.state.start("gameover");
     },
-   render: function(){
+   render: function(){      
       return;
-      for( var i = 0;i < this.computer.nodegrid.grid.length; ++i){
-       this.game.debug.body(this.computer.nodegrid.grid[i]);
-      }
-      for( var i = 0;i < this.player.nodegrid.grid.length; ++i){
-       this.game.debug.body(this.player.nodegrid.grid[i]);
-      }
-       
+      //for( var i = 0;i < this.computer.nodegrid.grid.length; ++i){
+      // this.game.debug.body(this.computer.nodegrid.grid[i]);
+      //}
+      //for( var i = 0;i < this.player.nodegrid.grid.length; ++i){
+      // this.game.debug.body(this.player.nodegrid.grid[i]);
+      //}
+       if( this.player.cells.getFirstAlive() !== null){
+         this.game.debug.spriteInfo(this.player.nodegrid.grid[0],32,32);          
+       }
+      
    }
 };

@@ -30,21 +30,15 @@ var Player = function(game,faction,is_player,stats) {
   //this.cells.enableBody = true;
   //this.cells.physicsBodyType = Phaser.Physics.ARCADE;
    
+   
+   // faction specific code   
    if( this.faction == FACTION.VIRUS){      
       mother_pos = 0;         
       this.nodegrid.y -= this.nodegrid.grid[0].height;
    }else if( this.faction == FACTION.WBC ){
       mother_pos = this.nodegrid.grid.length -1; // hardcoded stuf.   
    }
-         
-   // faction specific code   
-   
-   this.mother = new Mother(this.game,
-                           this.nodegrid.grid[mother_pos].x,
-                           this.nodegrid.grid[mother_pos].y,
-                           0,this.faction);   
-   //this.mother = new Mother(this.game,100,100,0);   
-   this.game.add.existing(this.mother);
+            
    // player/ computer specific properties
    if( this.is_player){
       this.nodegrid.visible = true;
@@ -53,6 +47,13 @@ var Player = function(game,faction,is_player,stats) {
       this.nodegrid.visible = false;
       this.stats = this.game.JORDAN_COMPUTER_STATS;
    }
+   
+   this.mother = new Mother(this.game,
+                           this.nodegrid.grid[mother_pos].x,
+                           this.nodegrid.grid[mother_pos].y,
+                           0,this);   
+   //this.mother = new Mother(this.game,100,100,0);   
+   this.game.add.existing(this.mother);
    
    
    // TODO: HACKS OF UTTER DESTRUCTION.... gdamit.. realated to the re-positioning 
@@ -86,29 +87,29 @@ var Player = function(game,faction,is_player,stats) {
    //this.cells.setAll("scale.y", 0.3);            
    
    
-   this.cellGenerator = this.game.time.events.loop(Phaser.Timer.SECOND,function(){
-      var scale = 0.3;
-      var new_cell = this.cells.getFirstExists(false);
-      if( !new_cell){
-         new_cell = new Cell(this.game,
-                              0,0,
-                              this.cells,
-                              this.faction,
-                              this.stats.cell_endurance,
-                              this.stats.cell_speed);
-         new_cell.target = this.mother;
-         new_cell.scale.x = scale;
-         new_cell.scale.y = scale;
-         new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);
-         this.cells.add(new_cell);                     
-         window.cell_count += 1;
-      }
-      //new_cell.body.x = this.mother.x + this.mother.body.width/2;
-      //new_cell.body.y = this.mother.y + this.mother.body.height/2;
-      new_cell.reset(this.mother.x + this.mother.body.width/2, this.mother.y + this.mother.body.height/2);         
-      new_cell.revive();
-   }, this);
-   this.cellGenerator.timer.start();     
+   //this.cellGenerator = this.game.time.events.loop(Phaser.Timer.SECOND,function(){
+   //   var scale = 0.3;
+   //   var new_cell = this.cells.getFirstExists(false);
+   //   if( !new_cell){
+   //      new_cell = new Cell(this.game,
+   //                           0,0,
+   //                           this.cells,
+   //                           this.faction,
+   //                           this.stats.cell_endurance,
+   //                           this.stats.cell_speed);
+   //      new_cell.target = this.mother;
+   //      new_cell.scale.x = scale;
+   //      new_cell.scale.y = scale;
+   //      new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);
+   //      this.cells.add(new_cell);                     
+   //      window.cell_count += 1;
+   //   }
+   //   //new_cell.body.x = this.mother.x + this.mother.body.width/2;
+   //   //new_cell.body.y = this.mother.y + this.mother.body.height/2;
+   //   new_cell.reset(this.mother.x + this.mother.body.width/2, this.mother.y + this.mother.body.height/2);         
+   //   new_cell.revive();
+   //}, this);
+   //this.cellGenerator.timer.start();     
 };
 Player.prototype = Object.create(Phaser.Group.prototype);
 Player.prototype.constructor = Player;

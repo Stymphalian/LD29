@@ -67,7 +67,7 @@ Menu.prototype = {
       
       
        this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
-          if(this.points !==0){
+          if(this.points !== 0){
 	this.stats.cell_endurance++;
 	this.points--;
             this.endurance_text.text = this.stats.cell_endurance;

@@ -15,7 +15,10 @@ Play.prototype = {
               
        this.player = new Player(this.game,this.game.JORDAN_PLAYER_STATS.faction,true,this.game.JORDAN_PLAYER_STATS); 
        this.computer= new Player(this.game,this.game.JORDAN_COMPUTER_STATS.faction,false,this.game.JORDAN_COMPUTER_STATS);
-       
+              
+       // add wall into the screen to make a more 'tunnel' liek appearance.
+       this.place_walls();       
+             
 		  this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
 		  console.log("Starting play");
 
@@ -39,7 +42,45 @@ Play.prototype = {
        
        this.cell_count_text = this.game.add.text(50,50,"Count " + window.cell_count,{fontSize:"28px",fill:"#000"});
 	 },
-	 update: function() {             
+   place_walls : function(){
+      this.walls = this.game.add.group();      
+      
+      
+      var x_increment = 75; //150/2
+      var y_increment = 50;
+      var x_pos, y_pos;
+      var x_start, y_start;
+      var new_node;   
+      x_start = 375;
+      y_start = 25;
+      x_pos = 0;
+      y_pos = 0;
+
+      //this.enableBody = true;
+      //this.physicsBodyType = Phaser.Physics.ARCADE;
+      //this.immovable = true;
+      //this.game.physics.arcade.enableBody(this);
+
+      for(var row = 0; row < 6; ++row){
+         x_pos = x_start;
+         y_pos = y_start;
+         for( var col = 0; col < 6; ++col){                        
+            new_node = new CellWall(this.game,x_pos + x_increment,y_pos,0);            
+            this.walls.add(new_node);
+            x_pos += x_increment;
+            y_pos += y_increment;
+         }			
+         x_start -= x_increment;
+         y_start += y_increment;
+      }
+      
+      
+      
+   },
+	 update: function() {     
+       this.game.physics.arcade.collide(this.player.cells,this.walls);
+       this.game.physics.arcade.collide(this.computer.cells,this.walls);
+       
        // player cells overlapping player nodes
        this.game.physics.arcade.overlap(this.player.cells,this.player.nodegrid,this.node_hit,null,this);
        

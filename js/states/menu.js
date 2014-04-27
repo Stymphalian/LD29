@@ -54,32 +54,32 @@ Menu.prototype = {
      
     //this.choose_sides.destroy();
     this.set_stats_screen = this.game.add.group();        
-<<<<<<< HEAD
-   this.point_text = this.game.add.text(20,20,this.available_points,{fontSize:"32px",fill:"#fff"}); 
-                       
-=======
+
     this.point_text = this.game.add.text(20,20,this.points, {fontSize:"32px",fill:"#fff"});
       
       this.endurance_text = this.game.add.text(147,237,  " "+  this.stats.cell_endurance, {fontSize:"32px",fill:"#fff"});
       this.enduranceWord = this.game.add.text(100, 137, "Endurance", {fontSize: "24px",fill: "#fff"});
       
       this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
-          if(this.points > -1){
-            this.endurance_text.text = this.stats.cell_endurance++;
-            this.point_text.text = this.points--;
+          if(this.points !== 0){
+	         this.stats.cell_endurance++;
+	         this.points--;
+            this.endurance_text.text = this.stats.cell_endurance;
+            this.point_text.text = this.points;
           }
       }, this);
       this.enduranceUpButton.scale.setTo(4, 4);
+          
       this.enduranceDownButton = this.game.add.button(this.game.width- 700, this.game.height-250, 'attributeButton', function(){
-          if(this.stats.cell_endurance > -1){
-           this.endurance_text.text = this.stats.cell_endurance--;
-            this.point_text.text = this.points++;
+          if(this.stats.cell_endurance  !== 0){
+	        this.stats.cell_endurance--;
+	        this.points++;
+           this.endurance_text.text = this.stats.cell_endurance;
+            this.point_text.text = this.points;
           }
       }, this);
       this.enduranceDownButton.scale.setTo(4, -4);
-     
-        
->>>>>>> 0ac08087c55f1fd012b837f351ff274c37d053b0
+      
     // add our start button with a callback
     this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){
       if( this.available_points > 0){

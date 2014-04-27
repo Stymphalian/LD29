@@ -11,9 +11,9 @@ Play.prototype = {
 		  // start the phaser arcade physics engine
 		  this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		  this.background = this.game.add.sprite(0,0,"play_background");
-                             
-       this.player = new Player(this.game,FACTION.WBC,true,this.game.JORDAN_PLAYER_STATS); 
-       this.computer= new Player(this.game,FACTION.VIRUS,false,this.game.JORDAN_COMPUTER_STATS);
+              
+       this.player = new Player(this.game,this.game.JORDAN_PLAYER_STATS.faction,true,this.game.JORDAN_PLAYER_STATS); 
+       this.computer= new Player(this.game,this.game.JORDAN_COMPUTER_STATS.faction,false,this.game.JORDAN_COMPUTER_STATS);
        
 		  this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
 		  console.log("Starting play");
@@ -21,8 +21,8 @@ Play.prototype = {
 		  // add keyboard controls
         this.flapKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
         this.flapKey.onDown.add(function(){                      
-           this.player.nodegrid.renderable = !this.player.nodegrid.renderabl;
-           this.computer.nodegrid.renderabl = !this.computer.nodegrid.renderable;             
+           this.player.nodegrid.visible = !this.player.nodegrid.visible;
+           this.computer.nodegrid.visible = !this.computer.nodegrid.visible;             
         }, this);
        //this.player.nodegrid.visible = true;
        //this.computer.nodegrid.visible = true; 

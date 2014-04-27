@@ -14,12 +14,8 @@ var Player = function(game,faction,is_player,stats) {
   this.cell_speed = stats.cell_speed;  
   this.faction = faction;
   this.is_player = is_player;
-  this.stats = {
-     spawn_rate: 0,
-     cell_endurance:0,
-     cell_speed: 0,    
-  };
-
+  this.stats = {};
+   
    var mother_pos = 0;
    var is_up = false;
    if( this.faction == FACTION.VIRUS){      
@@ -51,15 +47,15 @@ var Player = function(game,faction,is_player,stats) {
    this.game.add.existing(this.mother);
    // player/ computer specific properties
    if( this.is_player){
-      this.nodegrid.visible= true;
+      this.nodegrid.visible = true;
       this.stats = this.game.JORDAN_PLAYER_STATS;
    }else {
       this.nodegrid.visible = false;
       this.stats = this.game.JORDAN_COMPUTER_STATS;
    }
          
-   
-   for( var i = 0; i < 10; ++i){
+   if(this.is_player){
+   for( var i = 0; i < 1; ++i){
       this.cells.add(new Cell(this.game,
                               this.game.world.randomX,
                               this.game.world.randomY,
@@ -69,28 +65,30 @@ var Player = function(game,faction,is_player,stats) {
    this.cells.setAll('target',this.mother);
    this.cells.setAll('scale.x',0.3);
    this.cells.setAll("scale.y", 0.3);            
+   }
    
-   this.cellGenerator = this.game.time.events.loop(Phaser.Timer.SECOND,function(){
-      var scale = 0.3;
-      var new_cell = this.cells.getFirstExists(false);
-      if( !new_cell){
-         new_cell = new Cell(this.game,
-                              0,0,
-                              this.cells,
-                              this.faction,
-                              this.stats.cell_endurance,
-                              this.stats.cell_speed);
-         new_cell.target = this.mother;
-         new_cell.scale.x = scale;
-         new_cell.scale.y = scale;
-         new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);
-         this.cells.add(new_cell);                     
-      }
-      //new_cell.body.x = this.mother.x + this.mother.body.width/2;
-      //new_cell.body.y = this.mother.y + this.mother.body.height/2;
-      new_cell.reset(this.mother.x + this.mother.body.width/2, this.mother.y + this.mother.body.height/2);         
-   }, this);
-   this.cellGenerator.timer.start();     
+   //this.cellGenerator = this.game.time.events.loop(Phaser.Timer.SECOND,function(){
+   //   var scale = 0.3;
+   //   var new_cell = this.cells.getFirstExists(false);
+   //   if( !new_cell){
+   //      new_cell = new Cell(this.game,
+   //                           0,0,
+   //                           this.cells,
+   //                           this.faction,
+   //                           this.stats.cell_endurance,
+   //                           this.stats.cell_speed);
+   //      new_cell.target = this.mother;
+   //      new_cell.scale.x = scale;
+   //      new_cell.scale.y = scale;
+   //      new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);
+   //      this.cells.add(new_cell);                     
+   //   }
+   //   //new_cell.body.x = this.mother.x + this.mother.body.width/2;
+   //   //new_cell.body.y = this.mother.y + this.mother.body.height/2;
+   //   new_cell.reset(this.mother.x + this.mother.body.width/2, this.mother.y + this.mother.body.height/2);         
+   //   new_cell.revive();
+   //}, this);
+   //this.cellGenerator.timer.start();     
 };
 Player.prototype = Object.create(Phaser.Group.prototype);
 Player.prototype.constructor = Player;

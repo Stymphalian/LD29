@@ -158,6 +158,7 @@ Play.prototype = {
        this.game.state.start("gameover");
     },
    render: function(){            
+      return;
       for( var i = 0;i < this.computer.nodegrid.grid.length; ++i){
        this.game.debug.body(this.computer.nodegrid.grid[i]);
       }

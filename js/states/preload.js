@@ -18,6 +18,7 @@ Preload.prototype = {
      this.load.image("gameover","resources/gameover.png");
      this.load.spritesheet("Node", "resources/node_direction.png",32,32,3);
      this.load.spritesheet("NodeVirus", "resources/node_direction_virus.png",32,32,3);
+     this.load.image("healthSegment", "resources/healthSegment.png");
      
      this.load.image("WBCMother","resources/WBCellHappy.png");         
      this.load.image("VirusMother","resources/VirusCell.png");         

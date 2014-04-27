@@ -48,21 +48,20 @@ var Player = function(game,faction,is_player,stats) {
       this.stats = this.game.JORDAN_COMPUTER_STATS;
    }
    
-   this.mother = new Mother(this.game,
-                           this.nodegrid.grid[mother_pos].x,
-                           this.nodegrid.grid[mother_pos].y,
-                           0,this);   
-   //this.mother = new Mother(this.game,100,100,0);   
-   this.game.add.existing(this.mother);
-   
    
    // TODO: HACKS OF UTTER DESTRUCTION.... gdamit.. realated to the re-positioning 
    // code in Node.js line 36,37
-   if( is_up === false){
-      this.mother.y -= this.mother.height;  
+   var mother_pos_y = this.nodegrid.grid[mother_pos].y;      
+   if( is_up === false){            
+      mother_pos_y -= 32;//this.mother.height;      
    }
-         
-   
+   this.mother = new Mother(this.game,
+                           this.nodegrid.grid[mother_pos].x,
+                           mother_pos_y,
+                           0,this);   
+   //this.mother = new Mother(this.game,100,100,0);   
+   this.game.add.existing(this.mother);
+      
    var scale;
    var new_cell;
    

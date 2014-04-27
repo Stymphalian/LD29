@@ -65,7 +65,8 @@ Menu.prototype = {
       this.spawn_text = this.game.add.text(549, 237, " "+ this.stats.spawn_rate, {fontSize:"32px",fill:"#fff"});
       this.spawnWord = this.game.add.text(515, 137, "Spawn Rate", {fontSize: "24px",fill: "#fff"});
       
-      
+      this.attributeUpFX = this.game.add.audio("AttributeUpSound");
+    
        this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
           if(this.points !==0){
 	this.stats.cell_endurance++;
@@ -73,6 +74,7 @@ Menu.prototype = {
             this.endurance_text.text = this.stats.cell_endurance;
             this.point_text.text = this.points;
           }
+           this.attributeUpFX.play();
       }, this);
       this.enduranceUpButton.scale.setTo(4, 4);
      
@@ -93,6 +95,7 @@ Menu.prototype = {
               this.speed_text.text = this.stats.cell_speed;
               this.point_text.text = this.points;
           }
+          this.attributeUpFX.play();
       }, this);
           this.speedUpButton.scale.setTo(4, 4);
           
@@ -113,6 +116,7 @@ Menu.prototype = {
               this.spawn_text.text = this.stats.spawn_rate;
               this.point_text.text = this.points;
           }
+          this.attributeUpFX.play();
       }, this);
       this.spawnUpButton.scale.setTo(4,4);
       

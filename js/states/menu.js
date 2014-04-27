@@ -52,14 +52,10 @@ Menu.prototype = {
      this.choose_sides.visible = false;
      
     //this.choose_sides.destroy();
-    this.set_stats_screen = this.game.add.group();     
-     this.points = 
+    this.set_stats_screen = this.game.add.group();        
+   this.point_text = this.game.add.text(20,20,this.available_points,{fontSize:"32px",fill:"#fff"}); 
      
-   this.game.add.text
-     
-     
-     
-     
+        
     // add our start button with a callback
     this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){
       if( this.available_points > 0){
@@ -73,17 +69,28 @@ Menu.prototype = {
      
     this.set_stats_screen.add(this.startButton);      
   },
-  startClick: function() {     
-     
+   
+   
+  startClick: function() {         
      this.game.JORDAN_PLAYER_STATS = {
-        spawn_rate: 0,
-        cell_endurance: 10,
-        cell_speed: 20        
+        spawn_rate: this.stats.spawn_rate,
+        cell_endurance: this.stats.cell_endurance,
+        cell_speed: this.stats.cell_speed,
+        faction: this.faction
      };
+     
+     var enemy_faction;
+     if( this.faction == FACTION.WBC){
+         enemy_faction = FACTION.VIRUS;
+     }else{
+         enemy_faction = FACTION.WBC;  
+     }
+     
      this.game.JORDAN_COMPUTER_STATS = {
         spawn_rate: 0,
         cell_endurance: 10,
-        cell_speed: 10        
+        cell_speed: 10,
+        faction:enemy_faction
      };
      
     this.game.state.start('play');

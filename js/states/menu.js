@@ -11,6 +11,7 @@ Menu.prototype = {
         cell_endurance : 0,
         cell_speed: 0        
      };
+     //button = game.add.button(game.world.centerX - 95, 400, 'attributeButton', actionOnClic, this, 2, 1, 0);
      this.points = 10;
 
       // start game button
@@ -53,7 +54,25 @@ Menu.prototype = {
      
     //this.choose_sides.destroy();
     this.set_stats_screen = this.game.add.group();        
-   this.point_text = this.game.add.text(20,20,this.available_points,{fontSize:"32px",fill:"#fff"}); 
+    this.point_text = this.game.add.text(20,20,this.points, {fontSize:"32px",fill:"#fff"});
+      
+      this.endurance_text = this.game.add.text(147,237,  " "+  this.stats.cell_endurance, {fontSize:"32px",fill:"#fff"});
+      this.enduranceWord = this.game.add.text(100, 137, "Endurance", {fontSize: "24px",fill: "#fff"});
+      
+      this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
+          if(this.points > -1){
+            this.endurance_text.text = this.stats.cell_endurance++;
+            this.point_text.text = this.points--;
+          }
+      }, this);
+      this.enduranceUpButton.scale.setTo(4, 4);
+      this.enduranceDownButton = this.game.add.button(this.game.width- 700, this.game.height-250, 'attributeButton', function(){
+          if(this.stats.cell_endurance > -1){
+           this.endurance_text.text = this.stats.cell_endurance--;
+            this.point_text.text = this.points++;
+          }
+      }, this);
+      this.enduranceDownButton.scale.setTo(4, -4);
      
         
     // add our start button with a callback
@@ -94,5 +113,5 @@ Menu.prototype = {
      };
      
     this.game.state.start('play');
-  }
+  } 
 };

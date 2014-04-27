@@ -54,18 +54,11 @@ Menu.prototype = {
      
     //this.choose_sides.destroy();
     this.set_stats_screen = this.game.add.group();        
-
     this.point_text = this.game.add.text(20,20,this.points, {fontSize:"32px",fill:"#fff"});
       
       this.endurance_text = this.game.add.text(149,237,  " "+  this.stats.cell_endurance, {fontSize:"32px",fill:"#fff"});
       this.enduranceWord = this.game.add.text(100, 137, "Endurance", {fontSize: "24px",fill: "#fff"});
       
-<<<<<<< HEAD
-      this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
-          if(this.points !== 0){
-	         this.stats.cell_endurance++;
-	         this.points--;
-=======
       this.speed_text = this.game.add.text(349, 237, " "+ this.stats.cell_speed, {fontSize:"32px",fill:"#fff"});
       this.speedWord = this.game.add.text(320, 137, "Speed", {fontSize: "24px",fill: "#fff"});
       
@@ -77,33 +70,21 @@ Menu.prototype = {
           if(this.points !==0){
 	this.stats.cell_endurance++;
 	this.points--;
->>>>>>> 512d4eabe9fd78a62906a58ac3e156e7c19f162c
             this.endurance_text.text = this.stats.cell_endurance;
             this.point_text.text = this.points;
           }
       }, this);
       this.enduranceUpButton.scale.setTo(4, 4);
-<<<<<<< HEAD
-          
-      this.enduranceDownButton = this.game.add.button(this.game.width- 700, this.game.height-250, 'attributeButton', function(){
-          if(this.stats.cell_endurance  !== 0){
-	        this.stats.cell_endurance--;
-	        this.points++;
-=======
      
       this.enduranceDownButton = this.game.add.button(this.game.width- 700, this.game.height-250, 'attributeButton', function(){
         if(this.stats.cell_endurance  !==0){
 	this.stats.cell_endurance--;
 	this.points++;
->>>>>>> 512d4eabe9fd78a62906a58ac3e156e7c19f162c
            this.endurance_text.text = this.stats.cell_endurance;
             this.point_text.text = this.points;
           }
       }, this);
       this.enduranceDownButton.scale.setTo(4, -4);
-<<<<<<< HEAD
-      
-=======
      
       this.speedUpButton = this.game.add.button(this.game.width- 500, this.game.height -450, 'attributeButton', function(){
           if(this.points !== 0){
@@ -145,7 +126,6 @@ Menu.prototype = {
       }, this);
       this.spawnDownButton.scale.setTo(4, -4);
         
->>>>>>> 512d4eabe9fd78a62906a58ac3e156e7c19f162c
     // add our start button with a callback
     this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){
       if( this.available_points > 0){
@@ -186,3 +166,7 @@ Menu.prototype = {
     this.game.state.start('play');
   } 
 };
+
+
+
+

@@ -65,7 +65,7 @@ Play.prototype = {
          x_pos = x_start;
          y_pos = y_start;
          for( var col = 0; col < 6; ++col){                        
-            new_node = new CellWall(this.game,x_pos + x_increment,y_pos,0);            
+            new_node = new CellWall(this.game,x_pos + x_increment + 36/2,y_pos + 36/2,0);            
             this.walls.add(new_node);
             x_pos += x_increment;
             y_pos += y_increment;
@@ -74,7 +74,10 @@ Play.prototype = {
          y_start += y_increment;
       }
       
-      
+      this.walls.forEach(function(wall){
+         wall.anchor.setTo(0.5,0.5);         
+         wall.angle = 45;         
+      });
       
    },
 	 update: function() {     
@@ -149,16 +152,16 @@ Play.prototype = {
        this.game.state.start("gameover");
     },
    render: function(){      
-      return;
+   //   return;
       //for( var i = 0;i < this.computer.nodegrid.grid.length; ++i){
       // this.game.debug.body(this.computer.nodegrid.grid[i]);
       //}
-      //for( var i = 0;i < this.player.nodegrid.grid.length; ++i){
+      //for( var i = 0;i < this.walls.length; ++i){
       // this.game.debug.body(this.player.nodegrid.grid[i]);
       //}
-       if( this.player.cells.getFirstAlive() !== null){
-         this.game.debug.spriteInfo(this.player.nodegrid.grid[0],32,32);          
-       }
       
+      this.walls.forEachExists(function(wall){
+         this.game.debug.body(wall);
+      },this);       
    }
 };

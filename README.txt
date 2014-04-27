@@ -116,12 +116,12 @@ health
 speed
 cell spawn rate.
 
-attributes effects on cells
-cell fighting.
+attributes effects on cells [x]
+cell fighting.[x]
 background images.
 walls on game board.
 sounds (ALL)
-title screen
+title screen 
 credit screen
 
 extra:

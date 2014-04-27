@@ -41,6 +41,8 @@ Play.prototype = {
 		  this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
        
        this.cell_count_text = this.game.add.text(50,50,"Count " + window.cell_count,{fontSize:"28px",fill:"#000"});
+         
+         this.CellCollisionFX = this.game.add.audio("CellCollision");
 	 },
    place_walls : function(){
       this.walls = this.game.add.group();      
@@ -103,6 +105,7 @@ Play.prototype = {
        this.cell_count_text.text = "Count "  + window.cell_count;
 	 },
    cell_hit_cell: function(player_cell, computer_cell){
+       this.CellCollisionFX.play();
       var temp = player_cell.endurance;
       player_cell.damage(computer_cell.endurance);
       computer_cell.damage(temp);   

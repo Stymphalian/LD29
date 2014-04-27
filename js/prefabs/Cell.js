@@ -21,11 +21,13 @@ var Cell = function(game, x, y, group,faction,endurance,speed) {
   this.anchor.setTo(0.5, 0.5);
   this.group = group;
   this.game.physics.arcade.enableBody(this);
-   this.endurance = endurance;
+   
+  this.endurance = endurance;
+  this.jordan_speed = speed;
      
   this.maxVelocity = 50.0;
-  //this.maxForce = 10.0;
-   this.maxForce = speed;
+  this.maxForce = 10.0;
+  // this.maxForce = speed;
   this.seekForce = 0.5;
   
   this.radius = Math.sqrt(this.height * this.height + this.width * this.width) / 2;

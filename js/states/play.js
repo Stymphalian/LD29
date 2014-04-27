@@ -14,23 +14,15 @@ Play.prototype = {
                              
        this.player = new Player(this.game,FACTION.WBC,true,this.game.JORDAN_PLAYER_STATS); 
        this.computer= new Player(this.game,FACTION.VIRUS,false,this.game.JORDAN_COMPUTER_STATS);
-       // creates the this.grid, and this.grid_group properties
-       //this.nodegrid = new NodeGrid(this.game);
-       //this.nodegrid.is_up = true;
-                     
+       
 		  this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
 		  console.log("Starting play");
 
 		  // add keyboard controls
         this.flapKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
-        this.flapKey.onDown.add(function(){           
-            if( this.computer.nodegrid.visible == true ){
-               this.player.nodegrid.visible = true;
-               this.computer.nodegrid.visible = false; 
-            }else{
-               this.player.nodegrid.visible = false;
-               this.computer.nodegrid.visible = true;                
-            }
+        this.flapKey.onDown.add(function(){                      
+           this.player.nodegrid.renderable = !this.player.nodegrid.renderabl;
+           this.computer.nodegrid.renderabl = !this.computer.nodegrid.renderable;             
         }, this);
        //this.player.nodegrid.visible = true;
        //this.computer.nodegrid.visible = true; 
@@ -67,12 +59,13 @@ Play.prototype = {
    },
     mother_hit: function(mother, cell){
        console.log("mother hit");
+       cell.kill();
        //mother.reset(this.game.world.randomX, this.game.world.randomY);
     },
    node_hit : function(cell, node){      
       // this litterly gets called tens of thousands of times per game....
       if( cell.target === node){ return;}
-      var next_target =node.getNeighbourFromSendDirection();  
+      var next_target = node.getNeighbourFromSendDirection();  
       if( next_target == null){
          console.log("why null?");
       }

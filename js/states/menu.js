@@ -54,8 +54,7 @@ Menu.prototype = {
     //this.choose_sides.destroy();
     this.set_stats_screen = this.game.add.group();        
    this.point_text = this.game.add.text(20,20,this.available_points,{fontSize:"32px",fill:"#fff"}); 
-     
-        
+                       
     // add our start button with a callback
     this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){
       if( this.available_points > 0){

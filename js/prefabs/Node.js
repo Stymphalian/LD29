@@ -88,14 +88,14 @@ Node.prototype.getNeighbourFromSendDirection = function(direction){
    }
    
    // make sure a valid direction node is returned.
-   if( neighbour == null){
+   if( neighbour === null){
       neighbour = this.getNeighbour(dirs[NODE_SEND_DIRECTIONS.LEFT]);
-      if( neighbour == null){
+      if( neighbour === null){
          neighbour = this.getNeighbour(dirs[NODE_SEND_DIRECTIONS.RIGHT]);
       }
    }
    
-   if( neighbour == null){
+   if( neighbour === null){
       // this case only happens on the mother cell nodes.
       //console.log("SOMETHING IS VERY VERY WRONG WITH NODE SEND DIRECTION");
    }
@@ -116,6 +116,6 @@ Node.prototype.getNeighbour = function(direction){
       col -=1;      
    }
    if( row < 0 || row >= stride ){ return null;}
-   if( col < 0 || col >= stride ) {return null;}
+   if( col < 0 || col >= stride ){return null;}
    return this.group.grid[row*stride + col];   
 };

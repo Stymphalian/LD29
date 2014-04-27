@@ -9,8 +9,7 @@ Preload.prototype = {
     this.asset.anchor.setTo(0.5, 0.5);
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
-     
-     
+          
      this.load.image("play_background", "resources/SkinLayerBackground.png");
      this.load.image("virus","resources/VirusCell.png");
      this.load.image("whitebloodcell_angry","resources/WBCellAngry.png");

@@ -14,6 +14,11 @@ var Player = function(game,faction,is_player,stats) {
   this.cell_speed = stats.cell_speed;  
   this.faction = faction;
   this.is_player = is_player;
+  this.stats = {
+     spawn_rate: 0,
+     cell_endurance:0,
+     cell_speed: 0,    
+  };
 
    var mother_pos = 0;
    var is_up = false;
@@ -47,58 +52,45 @@ var Player = function(game,faction,is_player,stats) {
    // player/ computer specific properties
    if( this.is_player){
       this.nodegrid.visible= true;
+      this.stats = this.game.JORDAN_PLAYER_STATS;
    }else {
       this.nodegrid.visible = false;
+      this.stats = this.game.JORDAN_COMPUTER_STATS;
    }
          
    
-   //for( var i = 0; i < 10; ++i){
-   //   this.cells.add(new Cell(this.game,
-   //                           this.game.world.randomX,
-   //                           this.game.world.randomY,
-   //                           this.cells,
-   //                           this.faction));      
-   //}      
-   //this.cells.setAll('target',this.mother);
+   for( var i = 0; i < 10; ++i){
+      this.cells.add(new Cell(this.game,
+                              this.game.world.randomX,
+                              this.game.world.randomY,
+                              this.cells,
+                              this.faction));      
+   }      
+   this.cells.setAll('target',this.mother);
    this.cells.setAll('scale.x',0.3);
    this.cells.setAll("scale.y", 0.3);            
    
    this.cellGenerator = this.game.time.events.loop(Phaser.Timer.SECOND,function(){
       var scale = 0.3;
-      var new_cell = this.cells.getFirstExists(false);
+      var new_cell = this.cells.getFirstDead(false);
       if( !new_cell){
          new_cell = new Cell(this.game,
                               0,0,
                               this.cells,
-                              this.faction);
+                              this.faction,
+                              this.stats.cell_endurance,
+                              this.stats.cell_speed);
          new_cell.target = this.mother;
          new_cell.scale.x = scale;
          new_cell.scale.y = scale;
          new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);
-         this.cells.add(new_cell);               
+         this.cells.add(new_cell);                     
       }
+      //new_cell.body.x = this.mother.x + this.mother.body.width/2;
+      //new_cell.body.y = this.mother.y + this.mother.body.height/2;
       new_cell.reset(this.mother.x + this.mother.body.width/2, this.mother.y + this.mother.body.height/2);         
    }, this);
-   this.cellGenerator.timer.start();
-   
-  //this.anchor.setTo(0.5, 0.5);
-  //this.animations.add('flap');
-  //this.animations.play('flap', 12, true);
-
-  //this.flapSound = this.game.add.audio('flap');
-
-  //this.name = 'Player';
-  //this.alive = false;
-   //this.visible = false;  
-
-  // enable physics on the Player
-  // and disable gravity on the Player
-  // until the game is started
-  //this.game.physics.arcade.enableBody(this);
-  //this.body.allowGravity = false;
-  //this.body.collideWorldBounds = true;
-
-  //this.events.onKilled.add(this.onKilled, this);  
+   this.cellGenerator.timer.start();     
 };
 Player.prototype = Object.create(Phaser.Group.prototype);
 Player.prototype.constructor = Player;

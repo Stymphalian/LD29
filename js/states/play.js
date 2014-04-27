@@ -113,6 +113,7 @@ Play.prototype = {
       computer_cell.damage(temp);   
    },
     mother_hit: function(mother, cell){
+        this.CellCollisionFX.play();
        console.log("mother hit");
        
        mother.damage(cell.endurance); 

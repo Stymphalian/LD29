@@ -55,7 +55,7 @@ var Player = function(game,faction,is_player,stats) {
    }
    
    
-   // HACKS OF UTTER DESTRUCTION.... gdamit.. realated to the re-positioning 
+   // TODO: HACKS OF UTTER DESTRUCTION.... gdamit.. realated to the re-positioning 
    // code in Node.js line 36,37
    if( is_up === false){
       this.mother.y -= this.mother.height;  
@@ -64,22 +64,23 @@ var Player = function(game,faction,is_player,stats) {
    
    var scale;
    var new_cell;
-   for( var i = 0; i < 10; ++i){
-      scale = 0.3;
-      new_cell = new Cell(this.game,
-                              this.game.world.randomX,
-                              this.game.world.randomY,
-                              //this.cells,
-                              undefined,
-                              this.faction,
-                              this.stats.cell_endurance,
-                              this.stats.cell_speed);
-      new_cell.target = this.mother;
-      new_cell.scale.x = scale;
-      new_cell.scale.y = scale;
-      new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);      
-      this.cells.add(new_cell);      
-   }      
+   
+   //for( var i = 0; i < 10; ++i){      
+   //   scale = 0.3;
+   //   new_cell = new Cell(this.game,
+   //                           this.game.world.randomX,
+   //                           this.game.world.randomY,
+   //                           //this.cells,
+   //                           undefined,
+   //                           this.faction,
+   //                           this.stats.cell_endurance,
+   //                           this.stats.cell_speed);
+   //   new_cell.target = this.mother;
+   //   new_cell.scale.x = scale;
+   //   new_cell.scale.y = scale;
+   //   new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);      
+   //   this.cells.add(new_cell);      
+   //}      
    //this.cells.setAll('target',this.mother);
    //this.cells.setAll('scale.x',0.3);
    //this.cells.setAll("scale.y", 0.3);            
@@ -100,6 +101,7 @@ var Player = function(game,faction,is_player,stats) {
          new_cell.scale.y = scale;
          new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);
          this.cells.add(new_cell);                     
+         window.cell_count += 1;
       }
       //new_cell.body.x = this.mother.x + this.mother.body.width/2;
       //new_cell.body.y = this.mother.y + this.mother.body.height/2;

@@ -8,6 +8,7 @@ function Play() {
 }
 Play.prototype = {
 	 create: function() {
+       window.cell_count = 0;
 		  // start the phaser arcade physics engine
 		  this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		  this.background = this.game.add.sprite(0,0,"play_background");
@@ -35,6 +36,8 @@ Play.prototype = {
 
 		  // keep the spacebar from propogating up to the browser
 		  this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+       
+       this.cell_count_text = this.game.add.text(50,50,"Count " + window.cell_count,{fontSize:"28px",fill:"#000"});
 	 },
 	 update: function() {             
        // player cells overlapping player nodes
@@ -52,6 +55,8 @@ Play.prototype = {
        
        // computer cells colliding with player mother
        this.game.physics.arcade.collide(this.computer.mother,this.player.cells,this.mother_hit,null,this);               
+       
+       this.cell_count_text.text = "Count "  + window.cell_count;
 	 },
    cell_hit_cell: function(player_cell, computer_cell){
       player_cell.kill();
@@ -89,9 +94,13 @@ Play.prototype = {
 	 deathHandler: function(bird, computer) {
 
     },
-   render: function(){      
+   render: function(){
+      return;
       for( var i = 0;i < this.computer.nodegrid.grid.length; ++i){
        this.game.debug.body(this.computer.nodegrid.grid[i]);
+      }
+      for( var i = 0;i < this.player.nodegrid.grid.length; ++i){
+       this.game.debug.body(this.player.nodegrid.grid[i]);
       }
        
    }

@@ -27,7 +27,7 @@ var Node = function(game, x, y, frame,col,row,group) {
   this.row = row;  
   this.group = group;
   this.send_direction = NODE_SEND_DIRECTIONS.BOTH;  
-  this.frame = this.send_direction;  
+  this.frame = this.send_direction;     
    
    game.physics.arcade.enable(this);   
    this.body.immovable = true;   
@@ -42,9 +42,7 @@ var Node = function(game, x, y, frame,col,row,group) {
      this.send_direction  = (this.send_direction +1 ) % NODE_SEND_DIRECTIONS.NUMBER_OF_DIRECTIONS;
      this.frame = this.send_direction;     
   }
-  this.events.onInputDown.add(listener,this);
-   
-   
+  this.events.onInputDown.add(listener,this);      
 };
 
 Node.prototype = Object.create(Phaser.Sprite.prototype);

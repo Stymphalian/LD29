@@ -17,16 +17,24 @@
    };
 
 var Node = function(game, x, y, frame,col,row,group) {      
-  Phaser.Sprite.call(this, game, x, y, 'Node', frame);
+   var image = "Node";
+   if( group.is_up === false){
+      var image = "NodeVirus";      
+   }
+      
+  Phaser.Sprite.call(this, game, x, y, image, frame);
   this.col = col;
   this.row = row;  
   this.group = group;
   this.send_direction = NODE_SEND_DIRECTIONS.BOTH;  
   this.frame = this.send_direction;  
    
-   //this.anchor.setTo(0.5,0.5);
+   game.physics.arcade.enable(this);   
+   this.body.immovable = true;   
+      
    if( this.group.is_up === false ) {
-      this.scale.y *= -1;   
+      this.y += 32;
+      this.body.y += 32;
    }
   
   this.inputEnabled = true;    
@@ -36,8 +44,7 @@ var Node = function(game, x, y, frame,col,row,group) {
   }
   this.events.onInputDown.add(listener,this);
    
-   game.physics.arcade.enable(this);   
-   this.body.immovable = true;
+   
 };
 
 Node.prototype = Object.create(Phaser.Sprite.prototype);

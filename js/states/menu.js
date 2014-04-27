@@ -131,7 +131,8 @@ Menu.prototype = {
       if( this.points > 0){
              // do a tween on the number of points left.
           var bounce = this.game.add.tween(this.point_text);
-          bounce.to({y: this.point_text.height + 2}, 1000 + Math.random() * 3000, Phaser.Easing.Bounce.In, true, 0, 5,true);
+          bounce.to({y: this.point_text.height + 10}, 1000, Phaser.Easing.Bounce.Out, true, 0,1,true);
+         this.startClick();
       }else{
          this.startClick();        
       }

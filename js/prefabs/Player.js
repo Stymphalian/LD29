@@ -55,16 +55,25 @@ var Player = function(game,faction,is_player,stats) {
    }
          
    if(this.is_player){
-   for( var i = 0; i < 1; ++i){
-      this.cells.add(new Cell(this.game,
+   for( var i = 0; i < 10; ++i){
+      var scale = 0.3;
+      var new_cell = new Cell(this.game,
                               this.game.world.randomX,
                               this.game.world.randomY,
-                              this.cells,
-                              this.faction));      
+                              //this.cells,
+                              undefined,
+                              this.faction,
+                              this.stats.cell_endurance,
+                              this.stats.cell_speed);
+      new_cell.target = this.mother;
+      new_cell.scale.x = scale;
+      new_cell.scale.y = scale;
+      new_cell.body.setSize(new_cell.body.width*scale, new_cell.body.height*scale);      
+      this.cells.add(new_cell);      
    }      
-   this.cells.setAll('target',this.mother);
-   this.cells.setAll('scale.x',0.3);
-   this.cells.setAll("scale.y", 0.3);            
+   //this.cells.setAll('target',this.mother);
+   //this.cells.setAll('scale.x',0.3);
+   //this.cells.setAll("scale.y", 0.3);            
    }
    
    //this.cellGenerator = this.game.time.events.loop(Phaser.Timer.SECOND,function(){

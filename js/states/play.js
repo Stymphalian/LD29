@@ -64,11 +64,14 @@ Play.prototype = {
     },
    node_hit : function(cell, node){      
       // this litterly gets called tens of thousands of times per game....
-      if( cell.target === node){ return;}
+      if( cell.prev_target === node){ return;}
       var next_target = node.getNeighbourFromSendDirection();  
-      if( next_target == null){
+      if( next_target === null){
          console.log("why null?");         
-      }
+      }      
+      
+      // TODO FIND BETTER WAY!!!!!!
+      cell.prev_target = node;
       cell.target = next_target;
    },
 	 shutdown: function() {

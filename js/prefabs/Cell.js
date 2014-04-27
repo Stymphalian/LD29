@@ -19,7 +19,8 @@ var Cell = function(game, x, y, group,faction,endurance,speed) {
    
   Phaser.Sprite.call(this, game, x, y,image);
   this.anchor.setTo(0.5, 0.5);
-  this.group = group;
+  //this.group = group;
+   this.group = this.game.add.group();
   this.game.physics.arcade.enableBody(this);
    
   this.endurance = endurance;

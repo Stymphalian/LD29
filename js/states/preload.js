@@ -37,6 +37,7 @@ Preload.prototype = {
       this.load.audio("NodeSwitch","resources/NodeSwitch.wav");
       this.load.audio("RemainingPoints","resources/RemainingPoints.wav");
       this.load.audio("MenuMusic","resources/MenuMusic.wav");
+      this.load.audio("BattleMusic","resources/BattleMusic.wav");
 
 //
 //    this.load.audio('flap', 'assets/flap.wav');

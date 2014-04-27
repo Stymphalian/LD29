@@ -48,7 +48,9 @@ Play.prototype = {
        
        this.cell_count_text = this.game.add.text(50,50,"Count " + window.cell_count,{fontSize:"28px",fill:"#000"});
          
-         this.CellCollisionFX = this.game.add.audio("CellCollision");
+         this.CellCollisionFX = this.game.add.audio("CellCollision",.1);
+         this.BattleMusicFX = this.game.add.audio("BattleMusic", .6,true);
+         this.BattleMusicFX.play("",.6,true);
 	 },
    place_walls : function(){
       this.walls = this.game.add.group();      
@@ -87,7 +89,7 @@ Play.prototype = {
       });
       
    },
-	 update: function() {                   
+	 update: function() {        
        // player cells overlapping player nodes
        this.game.physics.arcade.overlap(this.player.cells,this.player.nodegrid,this.node_hit,null,this);
        
@@ -106,6 +108,7 @@ Play.prototype = {
        
        this.cell_count_text.text = "Count "  + window.cell_count;
 	 },
+    
    cell_hit_cell: function(player_cell, computer_cell){
        this.CellCollisionFX.play();
       var temp = player_cell.endurance;

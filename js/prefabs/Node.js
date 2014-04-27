@@ -36,9 +36,10 @@ var Node = function(game, x, y, frame,col,row,group) {
       this.y += 32;
       this.body.y += 32;
    }
-  
+  this.NodeSwitchFX = this.game.add.audio("NodeSwitch");
   this.inputEnabled = true;    
   function listener( sprite, pointer){
+      this.NodeSwitchFX.play();
      this.send_direction  = (this.send_direction +1 ) % NODE_SEND_DIRECTIONS.NUMBER_OF_DIRECTIONS;
      this.frame = this.send_direction;     
   }

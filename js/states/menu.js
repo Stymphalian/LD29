@@ -13,10 +13,14 @@ Menu.prototype = {
      };
      //button = game.add.button(game.world.centerX - 95, 400, 'attributeButton', actionOnClic, this, 2, 1, 0);
      this.points = 10;
-
+      this.attributeUpFX = this.game.add.audio("AttributeUpSound");
+      this.attributeDownFX = this.game.add.audio("AttributeDownSound");
+      this.menuSoundFX = this.game.add.audio("MenuClick");
+      this.incorrectFX = this.game.add.audio("RemainingPoints");
       // start game button
      this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
-         this.gotoChooseSides();     
+         this.gotoChooseSides();
+         this.menuSoundFX.play();
      },this);
      this.play_button.anchor.setTo(0.5,0.5);    
           
@@ -31,10 +35,12 @@ Menu.prototype = {
     this.choose_sides = this.game.add.group();
     this.virus_button = this.game.add.button(this.game.width/2,0,'virusButton',function(){
       this.faction = FACTION.VIRUS;
+        this.menuSoundFX.play();
       this.gotoStatScreen(); 
     },this);
     this.wbc_button = this.game.add.button(0,0,"wbcButton",function(){       
       this.faction = FACTION.WBC;
+        this.menuSoundFX.play();
       this.gotoStatScreen();  
     },this);
       
@@ -65,7 +71,6 @@ Menu.prototype = {
       this.spawn_text = this.game.add.text(549, 237, " "+ this.stats.spawn_rate, {fontSize:"32px",fill:"#fff"});
       this.spawnWord = this.game.add.text(515, 137, "Spawn Rate", {fontSize: "24px",fill: "#fff"});
       
-      this.attributeUpFX = this.game.add.audio("AttributeUpSound");
     
        this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
           if(this.points !== 0){
@@ -85,6 +90,7 @@ Menu.prototype = {
            this.endurance_text.text = this.stats.cell_endurance;
             this.point_text.text = this.points;
           }
+          this.attributeDownFX.play();
       }, this);
       this.enduranceDownButton.scale.setTo(4, -4);
      
@@ -106,6 +112,7 @@ Menu.prototype = {
                 this.speed_text.text = this.stats.cell_speed;
               this.point_text.text = this.points;
           }
+          this.attributeDownFX.play();
       }, this);
       this.speedDownButton.scale.setTo(4, -4);
       
@@ -127,17 +134,20 @@ Menu.prototype = {
               this.spawn_text.text = this.stats.spawn_rate;
               this.point_text.text = this.points;
           }
+          this.attributeDownFX.play();
       }, this);
       this.spawnDownButton.scale.setTo(4, -4);
         
     // add our start button with a callback
     this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){
       if( this.points > 0){
+          this.incorrectFX.play();
              // do a tween on the number of points left.
           var bounce = this.game.add.tween(this.point_text);
           bounce.to({y: this.point_text.height + 10}, 1000, Phaser.Easing.Bounce.Out, true, 0,1,true);
          this.startClick();
       }else{
+          this.menuSoundFX.play();
          this.startClick();        
       }
       

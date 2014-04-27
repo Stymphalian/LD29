@@ -30,6 +30,12 @@ Preload.prototype = {
      this.load.image("attributeButton", "resources/attributeButton.png");
      this.load.image("CellWall", "resources/cell_wall.png");      
      this.load.audio("AttributeUpSound", "resources/AttributeUpSound.wav");
+      this.load.audio("AttributeDownSound","resources/AttributeDownSound.wav");
+      
+      this.load.audio("MenuClick","resources/MenuClick.wav");
+      this.load.audio("CellCollision","resources/CellCollision.wav");
+      this.load.audio("NodeSwitch","resources/NodeSwitch.wav");
+      this.load.audio("RemainingPoints","resources/RemainingPoints.wav");
 
 //
 //    this.load.audio('flap', 'assets/flap.wav');

@@ -17,6 +17,8 @@ Menu.prototype = {
       this.attributeDownFX = this.game.add.audio("AttributeDownSound");
       this.menuSoundFX = this.game.add.audio("MenuClick");
       this.incorrectFX = this.game.add.audio("RemainingPoints");
+      this.menuMusicFX = this.game.add.audio("MenuMusic",1,true);
+      this.menuMusicFX.play("",1,true);
       // start game button
      this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
          this.gotoChooseSides();
@@ -74,67 +76,79 @@ Menu.prototype = {
     
        this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
           if(this.points !== 0){
+              this.attributeUpFX.play();
 	this.stats.cell_endurance++;
 	this.points--;
             this.endurance_text.text = this.stats.cell_endurance;
             this.point_text.text = this.points;
+          }else{
+              this.incorrectFX.play();
           }
-           this.attributeUpFX.play();
       }, this);
       this.enduranceUpButton.scale.setTo(4, 4);
      
       this.enduranceDownButton = this.game.add.button(this.game.width- 700, this.game.height-250, 'attributeButton', function(){
         if(this.stats.cell_endurance  !==0){
+            this.attributeDownFX.play();
 	this.stats.cell_endurance--;
 	this.points++;
            this.endurance_text.text = this.stats.cell_endurance;
             this.point_text.text = this.points;
+          }else{
+              this.incorrectFX.play();
           }
-          this.attributeDownFX.play();
       }, this);
       this.enduranceDownButton.scale.setTo(4, -4);
      
       this.speedUpButton = this.game.add.button(this.game.width- 500, this.game.height -450, 'attributeButton', function(){
           if(this.points !== 0){
+              this.attributeUpFX.play();
               this.stats.cell_speed++;
               this.points--;
               this.speed_text.text = this.stats.cell_speed;
               this.point_text.text = this.points;
+          }else{
+              this.incorrectFX.play();
           }
-          this.attributeUpFX.play();
       }, this);
           this.speedUpButton.scale.setTo(4, 4);
           
       this.speedDownButton = this.game.add.button(this.game.width- 500, this.game.height- 250, 'attributeButton', function(){
           if(this.stats.cell_speed !==0){
+              this.attributeDownFX.play();
               this.stats.cell_speed--;
               this.points++;
                 this.speed_text.text = this.stats.cell_speed;
               this.point_text.text = this.points;
+          }else{
+              this.incorrectFX.play();
           }
-          this.attributeDownFX.play();
       }, this);
       this.speedDownButton.scale.setTo(4, -4);
       
       this.spawnUpButton = this.game.add.button(this.game.width- 300, this.game.height- 450, 'attributeButton', function(){
           if(this.points !==0){
+              this.attributeUpFX.play();
               this.stats.spawn_rate++;
               this.points--;
               this.spawn_text.text = this.stats.spawn_rate;
               this.point_text.text = this.points;
+          }else{
+            this.incorrectFX.play();
           }
-          this.attributeUpFX.play();
       }, this);
       this.spawnUpButton.scale.setTo(4,4);
       
       this.spawnDownButton = this.game.add.button(this.game.width-300, this.game.height- 250, 'attributeButton', function() {
           if(this.stats.spawn_rate !== 0){
+              this.attributeDownFX.play();
               this.stats.spawn_rate--;
               this.points++;
               this.spawn_text.text = this.stats.spawn_rate;
               this.point_text.text = this.points;
+          }else{
+              this.incorrectFX.play();
           }
-          this.attributeDownFX.play();
       }, this);
       this.spawnDownButton.scale.setTo(4, -4);
         
@@ -148,6 +162,7 @@ Menu.prototype = {
          this.startClick();
       }else{
           this.menuSoundFX.play();
+          this.menuMusicFX.stop();
          this.startClick();        
       }
       

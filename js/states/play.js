@@ -11,10 +11,9 @@ Play.prototype = {
 		  // start the phaser arcade physics engine
 		  this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		  this.background = this.game.add.sprite(0,0,"play_background");
-        
-       
-       this.player = new Player(this.game,FACTION.WBC,true); 
-       this.computer= new Player(this.game,FACTION.VIRUS,false);
+                             
+       this.player = new Player(this.game,FACTION.WBC,true,this.game.JORDAN_PLAYER_STATS); 
+       this.computer= new Player(this.game,FACTION.VIRUS,false,this.game.JORDAN_COMPUTER_STATS);
        // creates the this.grid, and this.grid_group properties
        //this.nodegrid = new NodeGrid(this.game);
        //this.nodegrid.is_up = true;
@@ -23,7 +22,18 @@ Play.prototype = {
 		  console.log("Starting play");
 
 		  // add keyboard controls
-		  this.flapKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.flapKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
+        this.flapKey.onDown.add(function(){           
+            if( this.computer.nodegrid.visible == true ){
+               this.player.nodegrid.visible = true;
+               this.computer.nodegrid.visible = false; 
+            }else{
+               this.player.nodegrid.visible = false;
+               this.computer.nodegrid.visible = true;                
+            }
+        }, this);
+       //this.player.nodegrid.visible = true;
+       //this.computer.nodegrid.visible = true; 
 		  //this.flapKey.onDown.addOnce(this.startGame, this);
 		  //this.flapKey.onDown.add(this.bird.flap, this.bird);
 
@@ -34,15 +44,16 @@ Play.prototype = {
 		  // keep the spacebar from propogating up to the browser
 		  this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 	 },
-	 update: function() {       
+	 update: function() {             
        // player cells overlapping player nodes
        this.game.physics.arcade.overlap(this.player.cells,this.player.nodegrid,this.node_hit,null,this);
        
        // computer cell overlapping computer nodes.
-       this.game.physics.arcade.collide(this.computer.cells,this.computer.nodegrid,this.node_hit,null,this);
+       this.game.physics.arcade.overlap(this.computer.cells,this.computer.nodegrid,this.node_hit,null,this);
        
        // player cells colliding with computer cells
        this.game.physics.arcade.collide(this.player.cells,this.computer.cells,this.cell_hit_cell,null,this);
+       //this.game.physics.arcade.overlap(this.player.mother,this.player.cells,this.mother_hit,null,this);
        
        // player cells colliding with computer mother
        this.game.physics.arcade.collide(this.player.mother,this.computer.cells,this.mother_hit,null,this); 
@@ -56,12 +67,16 @@ Play.prototype = {
    },
     mother_hit: function(mother, cell){
        console.log("mother hit");
-       mother.reset(this.game.world.randomX, this.game.world.randomY);
+       //mother.reset(this.game.world.randomX, this.game.world.randomY);
     },
-   node_hit : function(cell, node){
-      console.log("cell hit node");
-      var next_node = node.getNeighbourFromSendDirection();      
-      cell.target = next_node;
+   node_hit : function(cell, node){      
+      // this litterly gets called tens of thousands of times per game....
+      if( cell.target === node){ return;}
+      var next_target =node.getNeighbourFromSendDirection();  
+      if( next_target == null){
+         console.log("why null?");
+      }
+      cell.target = next_target;
    },
 	 shutdown: function() {
 		  this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);  

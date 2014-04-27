@@ -1,8 +1,12 @@
-var Mother = function(game, x, y, frame) {   
-  Phaser.Sprite.call(this, game, x, y, 'Mother', frame);  
-   
-  var spawn_rate = 60; // 1 cell per second
-  var spawn_bar = 0;  
+var Mother = function(game, x, y, frame,faction) {   
+   var image;
+   if( faction == FACTION.VIRUS){
+      image = "VirusMother";
+   }else{
+      image = "WBCMother";
+   }      
+  Phaser.Sprite.call(this,game,x,y,image,frame);  
+     
   //this.anchor.setTo(0.5, 0.5);
   //this.animations.add('flap');
   //this.animations.play('flap', 12, true);
@@ -13,8 +17,9 @@ var Mother = function(game, x, y, frame) {
 
   this.game.physics.arcade.enableBody(this);
   this.body.allowGravity = false;
-  this.body.collideWorldBounds = true;
-  this.immovable = true;
+  this.body.collideWorldBounds = true;   
+  this.body.immovable = true;
+  //this.body.checkCollision = false;
   this.events.onKilled.add(this.onKilled, this);  
 };
 

@@ -11,9 +11,9 @@ Phaser.Point.prototype.limit = function(high, low) {
   return this;
 };
 
-var Cell = function(game, x, y, group,enemy_faction) {
+var Cell = function(game, x, y, group,faction,endurance,speed) {
    var image = "virus";
-   if( enemy_faction == FACTION.VIRUS){
+   if( faction == FACTION.WBC){
       image  = "whitebloodcell_angry";
    }   
    
@@ -21,10 +21,11 @@ var Cell = function(game, x, y, group,enemy_faction) {
   this.anchor.setTo(0.5, 0.5);
   this.group = group;
   this.game.physics.arcade.enableBody(this);
-
-  
+   this.endurance = endurance;
+     
   this.maxVelocity = 50.0;
-  this.maxForce = 10.0;
+  //this.maxForce = 10.0;
+   this.maxForce = speed;
   this.seekForce = 0.5;
   
   this.radius = Math.sqrt(this.height * this.height + this.width * this.width) / 2;

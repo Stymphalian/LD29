@@ -5,29 +5,87 @@ Menu.prototype = {
 
   },
   create: function() {
-    this.choose_sides = this.game.add.group();
-     
-        
-    this.set_stats = this.game.add.group();     
-     
-    // add our start button with a callback
-    this.startButton = this.game.add.button(this.game.width/2, 300, 'startButton', this.startClick, this);
-    this.startButton.anchor.setTo(0.5,0.5);
-     
-    this.set_stats.add(this.startButton);
-     
-         
-     
-    this.menu_text = this.game.add.text(this.game.width/2,0,"Menu Screen",{fontSize:"32px", fill:"#FFF"});
-    this.menu_text.anchor.setTo(0.5,0.5);
-    //this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
+     this.faction = null;
+     this.stats = {
+        spawn_rate: 0,
+        cell_endurance : 0,
+        cell_speed: 0        
+     };
+     this.points = 10;
+
+      // start game button
+     this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
+         this.gotoChooseSides();     
+     },this);
+     this.play_button.anchor.setTo(0.5,0.5);    
+          
   },
   update: function(){
      
   },
-  startClick: function() {
-     // choose side
-     // distribute stats page.     
+   gotoChooseSides : function(){
+      this.play_button.visible = false;
+      
+      // start with choosing sides.
+    this.choose_sides = this.game.add.group();
+    this.virus_button = this.game.add.button(0,0,'virusButton',function(){
+      this.faction = FACTION.VIRUS;
+      this.gotoStatScreen(); 
+    },this);
+    this.wbc_button = this.game.add.button(this.game.width/2,0,"wbcButton",function(){       
+      this.faction = FACTION.WBC;
+      this.gotoStatScreen();  
+    },this);
+      
+      this.wbc_button.width = this.game.width/2;
+      this.wbc_button.height = this.game.height;
+      this.virus_button.width = this.game.width/2;
+      this.virus_button.height = this.game.height;      
+      //this.wbc_button.anchor.setTo(0.5,0.5);
+      //this.virus_button.anchor.setTo(0.5,0.5);
+      
+      this.choose_sides.add(this.wbc_button);
+      this.choose_sides.add(this.virus_button);            
+   },
+  gotoStatScreen: function(){
+    // for the set stats screen   
+     this.choose_sides.visible = false;
+     
+    //this.choose_sides.destroy();
+    this.set_stats_screen = this.game.add.group();     
+     this.points = 
+     
+   this.game.add.text
+     
+     
+     
+     
+    // add our start button with a callback
+    this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){
+      if( this.available_points > 0){
+         // do a tween on the number of points left.
+      }else{
+         this.startClick();        
+      }
+      
+    }, this);
+    this.startButton.anchor.setTo(0.5,0.5);
+     
+    this.set_stats_screen.add(this.startButton);      
+  },
+  startClick: function() {     
+     
+     this.game.JORDAN_PLAYER_STATS = {
+        spawn_rate: 0,
+        cell_endurance: 10,
+        cell_speed: 20        
+     };
+     this.game.JORDAN_COMPUTER_STATS = {
+        spawn_rate: 0,
+        cell_endurance: 10,
+        cell_speed: 10        
+     };
+     
     this.game.state.start('play');
   }
 };

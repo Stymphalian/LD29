@@ -24,7 +24,7 @@ var NodeGrid = function(game,is_up) {
       y_pos = y_start;
       for( var col = 0; col < 6; ++col){            
          console.log("x_pos:" + x_pos  + ", y_pos:" + y_pos);
-         new_node = new Node(this.game,x_pos,y_pos,0,col,row,this);
+         new_node = new Node(this.game,x_pos,y_pos,0,col,row,this);         
          this.grid.push(new_node);
          this.add(new_node);
          x_pos += x_increment;

@@ -10,7 +10,7 @@ Preload.prototype = {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
      
-     this.load.image("startButton", "resources/start-button.png");
+     
      this.load.image("play_background", "resources/SkinLayerBackground.png");
      this.load.image("virus","resources/VirusCell.png");
      this.load.image("whitebloodcell_angry","resources/WBCellAngry.png");
@@ -19,7 +19,14 @@ Preload.prototype = {
      this.load.image("gameover","resources/gameover.png");
      this.load.spritesheet("Node", "resources/node_direction.png",32,32,3);
      
-     this.load.image("Mother","resources/WBCellHappy.png");         
+     this.load.image("WBCMother","resources/WBCellHappy.png");         
+     this.load.image("VirusMother","resources/VirusCell.png");         
+     
+     
+     this.load.image("playButton", "resources/playButton.png");
+     this.load.image("virusButton", "resources/virusButton.png");
+     this.load.image("wbcButton", "resources/wbcButton.png");     
+     this.load.image("startButton", "resources/start-button.png");
 //
 //    this.load.audio('flap', 'assets/flap.wav');
 //    this.load.audio('pipeHit', 'assets/pipe-hit.wav');

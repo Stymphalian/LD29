@@ -28,8 +28,11 @@ var Node = function(game, x, y, frame,col,row,group) {
   this.group = group;
   this.send_direction = NODE_SEND_DIRECTIONS.BOTH;  
   this.frame = this.send_direction;     
+   this.anchor.setTo(0.5,0.5);
+   this.x += 32/2;
    
-   game.physics.arcade.enable(this);   
+   this.game.physics.arcade.enable(this);   
+   //this.game.physics.ninja.enable(this);   
    this.body.immovable = true;   
       
    if( this.group.is_up === false ) {

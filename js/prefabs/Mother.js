@@ -6,6 +6,7 @@ var Mother = function(game, x, y, frame,player) {
       image = "WBCMother";
    }      
   Phaser.Sprite.call(this,game,x,y,image,frame);  
+   this.anchor.setTo(0.5,0.5);
      
   //this.anchor.setTo(0.5, 0.5);
   //this.animations.add('flap');
@@ -26,6 +27,9 @@ var Mother = function(game, x, y, frame,player) {
   this.body.immovable = true;
   //this.body.checkCollision = false;
   this.events.onKilled.add(this.onKilled, this);  
+   
+   //this.x -= 32/2;
+   //this.y -= 32/2;
 };
 
 Mother.prototype = Object.create(Phaser.Sprite.prototype);
@@ -37,7 +41,7 @@ Mother.prototype.update = function() {
       console.log("spawning cell?");
       this.current_count = 0;
       
-      var scale = 0.3;
+      var scale = 0.6;
       var new_cell = this.player.cells.getFirstExists(false);
       if( !new_cell){
          new_cell = new Cell(this.game,
@@ -55,7 +59,7 @@ Mother.prototype.update = function() {
       }
       //new_cell.body.x = this.mother.x + this.mother.body.width/2;
       //new_cell.body.y = this.mother.y + this.mother.body.height/2;
-      new_cell.reset(this.x + this.body.width/2, this.y + this.body.height/2);         
+      new_cell.reset(this.x, this.y );         
       new_cell.revive();                  
    }else{
       this.current_count++;  

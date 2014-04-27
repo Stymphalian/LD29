@@ -11,13 +11,19 @@ Play.prototype = {
        window.cell_count = 0;
 		  // start the phaser arcade physics engine
 		  this.game.physics.startSystem(Phaser.Physics.ARCADE);
-		  this.background = this.game.add.sprite(0,0,"play_background");
+//       this.game.physics.startSystem(Phaser.Physics.P2JS);
+//       this.game.physics.startSystem(Phaser.Physics.NINJA);
+//       this.game.physics.ninja.gravity = 0;
+       
+       
+		 this.background = this.game.add.sprite(0,0,"play_background");
+
               
        this.player = new Player(this.game,this.game.JORDAN_PLAYER_STATS.faction,true,this.game.JORDAN_PLAYER_STATS); 
        this.computer= new Player(this.game,this.game.JORDAN_COMPUTER_STATS.faction,false,this.game.JORDAN_COMPUTER_STATS);
               
        // add wall into the screen to make a more 'tunnel' liek appearance.
-       this.place_walls();       
+//       this.place_walls();       
              
 		  this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
 		  console.log("Starting play");
@@ -46,8 +52,7 @@ Play.prototype = {
 	 },
    place_walls : function(){
       this.walls = this.game.add.group();      
-      
-      
+            
       var x_increment = 75; //150/2
       var y_increment = 50;
       var x_pos, y_pos;
@@ -67,7 +72,7 @@ Play.prototype = {
          x_pos = x_start;
          y_pos = y_start;
          for( var col = 0; col < 6; ++col){                        
-            new_node = new CellWall(this.game,x_pos + x_increment + 36/2,y_pos + 36/2,0);            
+            new_node = new CellWall(this.game,x_pos + x_increment,y_pos,0);            
             this.walls.add(new_node);
             x_pos += x_increment;
             y_pos += y_increment;
@@ -82,10 +87,7 @@ Play.prototype = {
       });
       
    },
-	 update: function() {     
-       this.game.physics.arcade.collide(this.player.cells,this.walls);
-       this.game.physics.arcade.collide(this.computer.cells,this.walls);
-       
+	 update: function() {                   
        // player cells overlapping player nodes
        this.game.physics.arcade.overlap(this.player.cells,this.player.nodegrid,this.node_hit,null,this);
        
@@ -154,17 +156,16 @@ Play.prototype = {
        }
        this.game.state.start("gameover");
     },
-   render: function(){      
-   //   return;
-      //for( var i = 0;i < this.computer.nodegrid.grid.length; ++i){
-      // this.game.debug.body(this.computer.nodegrid.grid[i]);
-      //}
-      //for( var i = 0;i < this.walls.length; ++i){
-      // this.game.debug.body(this.player.nodegrid.grid[i]);
-      //}
+   render: function(){            
+      for( var i = 0;i < this.computer.nodegrid.grid.length; ++i){
+       this.game.debug.body(this.computer.nodegrid.grid[i]);
+      }
+      for( var i = 0;i < this.player.nodegrid.grid.length; ++i){
+       this.game.debug.body(this.player.nodegrid.grid[i]);
+      }
       
-      this.walls.forEachExists(function(wall){
-         this.game.debug.body(wall);
-      },this);       
+      //this.walls.forEachExists(function(wall){
+      //   this.game.debug.body(wall);
+      //},this);       
    }
 };

@@ -56,24 +56,75 @@ Menu.prototype = {
     this.set_stats_screen = this.game.add.group();        
     this.point_text = this.game.add.text(20,20,this.points, {fontSize:"32px",fill:"#fff"});
       
-      this.endurance_text = this.game.add.text(147,237,  " "+  this.stats.cell_endurance, {fontSize:"32px",fill:"#fff"});
+      this.endurance_text = this.game.add.text(149,237,  " "+  this.stats.cell_endurance, {fontSize:"32px",fill:"#fff"});
       this.enduranceWord = this.game.add.text(100, 137, "Endurance", {fontSize: "24px",fill: "#fff"});
       
-      this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
-          if(this.points > -1){
-            this.endurance_text.text = this.stats.cell_endurance++;
-            this.point_text.text = this.points--;
+      this.speed_text = this.game.add.text(349, 237, " "+ this.stats.cell_speed, {fontSize:"32px",fill:"#fff"});
+      this.speedWord = this.game.add.text(320, 137, "Speed", {fontSize: "24px",fill: "#fff"});
+      
+      this.spawn_text = this.game.add.text(549, 237, " "+ this.stats.spawn_rate, {fontSize:"32px",fill:"#fff"});
+      this.spawnWord = this.game.add.text(515, 137, "Spawn Rate", {fontSize: "24px",fill: "#fff"});
+      
+      
+       this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
+          if(this.points !==0){
+	this.stats.cell_endurance++;
+	this.points--;
+            this.endurance_text.text = this.stats.cell_endurance;
+            this.point_text.text = this.points;
           }
       }, this);
       this.enduranceUpButton.scale.setTo(4, 4);
+     
       this.enduranceDownButton = this.game.add.button(this.game.width- 700, this.game.height-250, 'attributeButton', function(){
-          if(this.stats.cell_endurance > -1){
-           this.endurance_text.text = this.stats.cell_endurance--;
-            this.point_text.text = this.points++;
+        if(this.stats.cell_endurance  !==0){
+	this.stats.cell_endurance--;
+	this.points++;
+           this.endurance_text.text = this.stats.cell_endurance;
+            this.point_text.text = this.points;
           }
       }, this);
       this.enduranceDownButton.scale.setTo(4, -4);
      
+      this.speedUpButton = this.game.add.button(this.game.width- 500, this.game.height -450, 'attributeButton', function(){
+          if(this.points !== 0){
+              this.stats.cell_speed++;
+              this.points--;
+              this.speed_text.text = this.stats.cell_speed;
+              this.point_text.text = this.points;
+          }
+      }, this);
+          this.speedUpButton.scale.setTo(4, 4);
+          
+      this.speedDownButton = this.game.add.button(this.game.width- 500, this.game.height- 250, 'attributeButton', function(){
+          if(this.stats.cell_speed !==0){
+              this.stats.cell_speed--;
+              this.points++;
+                this.speed_text.text = this.stats.cell_speed;
+              this.point_text.text = this.points;
+          }
+      }, this);
+      this.speedDownButton.scale.setTo(4, -4);
+      
+      this.spawnUpButton = this.game.add.button(this.game.width- 300, this.game.height- 450, 'attributeButton', function(){
+          if(this.points !==0){
+              this.stats.spawn_rate++;
+              this.points--;
+              this.spawn_text.text = this.stats.spawn_rate;
+              this.point_text.text = this.points;
+          }
+      }, this);
+      this.spawnUpButton.scale.setTo(4,4);
+      
+      this.spawnDownButton = this.game.add.button(this.game.width-300, this.game.height- 250, 'attributeButton', function() {
+          if(this.stats.spawn_rate !== 0){
+              this.stats.spawn_rate--;
+              this.points++;
+              this.spawn_text.text = this.stats.spawn_rate;
+              this.point_text.text = this.points;
+          }
+      }, this);
+      this.spawnDownButton.scale.setTo(4, -4);
         
     // add our start button with a callback
     this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){

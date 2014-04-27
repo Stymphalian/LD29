@@ -41,17 +41,17 @@ Play.prototype = {
        this.game.physics.arcade.overlap(this.player.cells,this.player.nodegrid,this.node_hit,null,this);
        
        // computer cell overlapping computer nodes.
-       this.game.physics.arcade.overlap(this.computer.cells,this.computer.nodegrid,this.node_hit,null,this);
+       //this.game.physics.arcade.overlap(this.computer.cells,this.computer.nodegrid,this.node_hit,null,this);
        
        // player cells colliding with computer cells
-       this.game.physics.arcade.collide(this.player.cells,this.computer.cells,this.cell_hit_cell,null,this);
+       //this.game.physics.arcade.collide(this.player.cells,this.computer.cells,this.cell_hit_cell,null,this);
        //this.game.physics.arcade.overlap(this.player.mother,this.player.cells,this.mother_hit,null,this);
        
        // player cells colliding with computer mother
-       this.game.physics.arcade.collide(this.player.mother,this.computer.cells,this.mother_hit,null,this); 
+       //this.game.physics.arcade.collide(this.player.mother,this.computer.cells,this.mother_hit,null,this); 
        
        // computer cells colliding with player mother
-       this.game.physics.arcade.collide(this.computer.mother,this.player.cells,this.mother_hit,null,this);               
+       //this.game.physics.arcade.collide(this.computer.mother,this.player.cells,this.mother_hit,null,this);               
 	 },
    cell_hit_cell: function(player_cell, computer_cell){
       player_cell.kill();
@@ -67,7 +67,7 @@ Play.prototype = {
       if( cell.target === node){ return;}
       var next_target = node.getNeighbourFromSendDirection();  
       if( next_target == null){
-         console.log("why null?");
+         console.log("why null?");         
       }
       cell.target = next_target;
    },

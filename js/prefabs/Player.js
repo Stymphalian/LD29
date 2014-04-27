@@ -72,7 +72,7 @@ var Player = function(game,faction,is_player,stats) {
    
    this.cellGenerator = this.game.time.events.loop(Phaser.Timer.SECOND,function(){
       var scale = 0.3;
-      var new_cell = this.cells.getFirstDead(false);
+      var new_cell = this.cells.getFirstExists(false);
       if( !new_cell){
          new_cell = new Cell(this.game,
                               0,0,

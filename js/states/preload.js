@@ -26,6 +26,7 @@ Preload.prototype = {
      this.load.image("virusButton", "resources/virusButton.png");
      this.load.image("wbcButton", "resources/wbcButton.png");     
      this.load.image("startButton", "resources/start-button.png");
+     this.load.image("attributeButton", "resources/attributeButton.png");
 //
 //    this.load.audio('flap', 'assets/flap.wav');
 //    this.load.audio('pipeHit', 'assets/pipe-hit.wav');

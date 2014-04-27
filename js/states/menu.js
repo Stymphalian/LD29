@@ -29,11 +29,11 @@ Menu.prototype = {
       
       // start with choosing sides.
     this.choose_sides = this.game.add.group();
-    this.virus_button = this.game.add.button(0,0,'virusButton',function(){
+    this.virus_button = this.game.add.button(this.game.width/2,0,'virusButton',function(){
       this.faction = FACTION.VIRUS;
       this.gotoStatScreen(); 
     },this);
-    this.wbc_button = this.game.add.button(this.game.width/2,0,"wbcButton",function(){       
+    this.wbc_button = this.game.add.button(0,0,"wbcButton",function(){       
       this.faction = FACTION.WBC;
       this.gotoStatScreen();  
     },this);
@@ -128,8 +128,10 @@ Menu.prototype = {
         
     // add our start button with a callback
     this.startButton = this.game.add.button(this.game.width - 60, this.game.height- 60, 'startButton', function(){
-      if( this.available_points > 0){
-         // do a tween on the number of points left.
+      if( this.points > 0){
+             // do a tween on the number of points left.
+          var bounce = this.game.add.tween(this.point_text);
+          bounce.to({y: this.point_text.height + 2}, 1000 + Math.random() * 3000, Phaser.Easing.Bounce.In, true, 0, 5,true);
       }else{
          this.startClick();        
       }
@@ -164,7 +166,7 @@ Menu.prototype = {
      };
      
     this.game.state.start('play');
-  } 
+  }
 };
 
 

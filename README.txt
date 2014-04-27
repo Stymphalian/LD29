@@ -110,3 +110,15 @@ TODO LIst:
 Image that we need.
 game title logo
 start button
+
+
+attributes effects on cells
+cell fighting.
+background images.
+walls on game board.
+sounds (ALL)
+title screen
+credit screen
+
+extra:
+global weapon.

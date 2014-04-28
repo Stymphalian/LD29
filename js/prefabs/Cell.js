@@ -46,7 +46,6 @@ var Cell = function(game, x, y, group,faction,endurance,speed) {
       
   this.events.onRevived.add(this.revived,this);
    
- this.info = this.game.add.text(this.x,this.y," " + this.endurance,{fontSize:"2px",fill:"#fff"});
 };
 Cell.prototype = Object.create(Phaser.Sprite.prototype);
 Cell.prototype.constructor = Cell;

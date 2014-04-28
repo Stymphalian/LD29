@@ -36,7 +36,7 @@ var Mother = function(game, x, y, frame,player) {
    // health segments
    this.health_group = this.game.add.group();
    var num_segments = this.endurance/10;   
-   var x_pos = this.x;
+   var x_pos = this.x + 25;
    var y_pos = this.y;   
    var count = 0;
    for( var i = 0;i < num_segments; ++i){
@@ -46,36 +46,40 @@ var Mother = function(game, x, y, frame,player) {
       if( count >= 10){
          count = 0;
          y_pos += 8;         
-         x_pos = this.x;
+         x_pos = this.x + 25;
       }
    }   
-  
-  
-   
+     
 };
 
 Mother.prototype = Object.create(Phaser.Sprite.prototype);
 Mother.prototype.constructor = Mother;
 
 Mother.prototype.draw_health_bar = function(){
+   this.health_group.forEachAlive(function(segment){
+      segment.kill();      
+   },this);
+   
    var num_segments = this.endurance/10;   
-   var x_pos = this.x;
+   var x_pos = this.x +25;
    var y_pos = this.y;   
    var count = 0;
    var segment;
    for( var i = 0;i < num_segments; ++i){
-      segment = this.health_group.getFirstDead();
+      segment = this.health_group.getFirstDead();      
       segment.revive();
-      segment.setTo(x_pos, y_pos);
+      segment.x = x_pos;
+      segment.y = y_pos;
       x_pos += 8;
       count++;
       if( count >= 10){
          count = 0;
          y_pos += 8;    
-         x_pos = this.x;
+         x_pos = this.x +25;
       }      
    }
 };
+
 Mother.prototype.update = function() {     
    if( this.current_count >= this.target_count ){
       // spawn unit.  
@@ -104,8 +108,7 @@ Mother.prototype.update = function() {
       new_cell.revive();                  
    }else{
       this.current_count++;  
-   }   
-         
+   }         
 };
 
 Mother.prototype.damage = function(amount){

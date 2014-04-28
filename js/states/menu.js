@@ -65,6 +65,7 @@ Menu.prototype = {
    },
   gotoStatScreen: function(){
     // for the set stats screen   
+      this.VirusBackgroundImage.visible = false;
      this.choose_sides.visible = false;
      
     //this.choose_sides.destroy();

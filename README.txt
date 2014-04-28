@@ -139,3 +139,7 @@ How to Play:
 Choose a faction.
 Distribute attribute points for your faction.
 Manipulate the environment to direct your cells to their location.
+
+
+http://ld29-dotb.kissr.com/
+http://ld29-dotb.herokuapp.com

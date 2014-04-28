@@ -45,6 +45,8 @@ var Cell = function(game, x, y, group,faction,endurance,speed) {
   this.maxDistance = this.radius * 10.0;
       
   this.events.onRevived.add(this.revived,this);
+   
+ this.info = this.game.add.text(this.x,this.y," " + this.endurance,{fontSize:"2px",fill:"#fff"});
 };
 Cell.prototype = Object.create(Phaser.Sprite.prototype);
 Cell.prototype.constructor = Cell;
@@ -78,6 +80,11 @@ Cell.prototype.update = function() {
   
   this.checkBorders();
   this.rotation = Math.atan2(this.body.velocity.y, this.body.velocity.x);
+   
+   
+   //this.info.x = this.x;
+   //this.info.y = this.y;
+   //this.info.text = " " + this.endurance;
 };
 
 Cell.prototype.applyForce = function(force) {

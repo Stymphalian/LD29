@@ -19,7 +19,9 @@ var Mother = function(game, x, y, frame,player) {
    this.current_count = 0;
    this.target_count = 60;  // 60 frames per second.. therefore , every 60 frames spawn a unit.
    this.target_count -= 2*this.player.stats.spawn_rate;
+   this.total_endurance = 200;
    this.endurance = 200;
+   this.prev_endurance = 0;
    
   this.game.physics.arcade.enableBody(this);
   this.body.allowGravity = false;
@@ -27,6 +29,11 @@ var Mother = function(game, x, y, frame,player) {
   this.body.immovable = true;
   //this.body.checkCollision = false;
   this.events.onKilled.add(this.onKilled, this);  
+   
+   var rate = parseFloat(this.target_count)/60;
+   rate = parseFloat(1/rate);   
+   this.healthText = this.game.add.text(this.x,this.y - 16,"Health: " + this.endurance,{textSize:"6px", fill:"#fff"});
+   this.spawnText = this.game.add.text(this.x,this.y,"Rate: " + rate,{textSize:"6px", fill:"#fff"});
    
    //this.x -= 32/2;
    //this.y -= 32/2;
@@ -64,10 +71,21 @@ Mother.prototype.update = function() {
    }else{
       this.current_count++;  
    }   
+   
+   
+   //var num_segments = this.endurance/10;
+   //var x_pos = this.x;
+   //var y_pos = this.y; 
+   //for( var  i = 0; i < num_segments; ++i){
+   //   x_pos += 
+   //   
+   //}
+   //for( var i = 0; i < 10
 };
 
 Mother.prototype.damage = function(amount){
  this.endurance -= amount;
+ this.healthText.text = "Health: " + this.endurance;
  if( this.endurance <= 0){
    this.kill();  
  }

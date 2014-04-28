@@ -19,7 +19,7 @@ var Mother = function(game, x, y, frame,player) {
    this.current_count = 0;
    this.target_count = 60;  // 60 frames per second.. therefore , every 60 frames spawn a unit.
    this.target_count -= 2*this.player.stats.spawn_rate;
-   this.total_endurance = 24;
+   this.total_endurance = 200;
    this.endurance = this.total_endurance;
    this.prev_endurance = 0;
    

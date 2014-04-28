@@ -17,58 +17,58 @@ Menu.prototype = {
       this.attributeDownFX = this.game.add.audio("AttributeDownSound");
       this.menuSoundFX = this.game.add.audio("MenuClick");
       this.incorrectFX = this.game.add.audio("RemainingPoints");
-      this.menuMusicFX = this.game.add.audio("MenuMusic",1,true);
-      this.menuMusicFX.play("",1,true);
+      this.menuMusicFX = this.game.add.audio("MenuMusic",1,true);            
+      this.createFactionChooseScreen();
+      this.createStatChooseScreen();
+      this.createCreditScreen();
      
-     
-     this.start_screen_background = this.game.add.image(0,0,"start_screen_background");          
-     
-      // start game button
-     this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
-         this.gotoChooseSides();
+      this.hideFactionChooseScreen();
+      this.hideStatChooseScreen();
+      this.hideCreditScreen();     
+      this.menuMusicFX.play("",1,true);     
+                    
+      this.start_screen_background = this.game.add.image(0,0,"start_screen_background");               
+       // start game button
+      this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
+         this.start_screen_background.visible = false;
+         this.play_button.visible = false;
+         this.showFactionChooseScreen();   
          this.menuSoundFX.play();
-     },this);
-     this.play_button.anchor.setTo(0.5,0.5);    
-     
-     
+      },this);
+      this.play_button.anchor.setTo(0.5,0.5);                        
   },
-  update: function(){
-     
-  },
-   gotoChooseSides : function(){
-      this.play_button.visible = false;
-      this.start_screen_background.visible = false;
-      
-      // start with choosing sides.
+   createFactionChooseScreen: function(){
+      // background images.
        this.VirusBackgroundImage = this.add.image(400, 0,"VirusBackground");
        this.BodyBackgroundImage = this.add.image(0,0,"HumanSkeleton");
-    this.choose_sides = this.game.add.group();
-    this.virus_button = this.game.add.button(650,0,'virusButton',function(){
-      this.faction = FACTION.VIRUS;
-        this.menuSoundFX.play();
-      this.gotoStatScreen(); 
-    },this);
-    this.wbc_button = this.game.add.button(0,0,"wbcButton",function(){       
-      this.faction = FACTION.WBC;
-        this.menuSoundFX.play();
-      this.gotoStatScreen();  
-    },this);
       
+      // buttons
+       this.virus_button = this.game.add.button(650,0,'virusButton',function(){
+           this.faction = FACTION.VIRUS;
+           this.menuSoundFX.play();
+           this.hideFactionChooseScreen();
+           this.showStatChooseScreen();
+       },this);      
+       this.wbc_button = this.game.add.button(0,0,"wbcButton",function(){       
+           this.faction = FACTION.WBC;
+           this.menuSoundFX.play();
+           this.hideFactionChooseScreen();
+           this.showStatChooseScreen();
+       },this);
       this.wbc_button.width = 150;
       this.wbc_button.height = 100;
       this.virus_button.width = 150;
       this.virus_button.height = 100;      
-      //this.wbc_button.anchor.setTo(0.5,0.5);
-      //this.virus_button.anchor.setTo(0.5,0.5);
       
+      // add to groups.
+      this.choose_sides = this.game.add.group();        
       this.choose_sides.add(this.wbc_button);
-      this.choose_sides.add(this.virus_button);            
+      this.choose_sides.add(this.virus_button);              
    },
-  gotoStatScreen: function(){
-    // for the set stats screen   
+   createStatChooseScreen: function(){
       this.VirusBackgroundImage.visible = false;
       this.BodyBackgroundImage.visible = false;
-     this.choose_sides.visible = false;
+      this.choose_sides.visible = false;
      
     //this.choose_sides.destroy();
     this.set_stats_screen = this.game.add.group();        
@@ -87,10 +87,10 @@ Menu.prototype = {
        this.enduranceUpButton = this.game.add.button(this.game.width- 700,  this.game.height- 450, 'attributeButton', function(){
           if(this.points !== 0){
               this.attributeUpFX.play();
-	this.stats.cell_endurance++;
-	this.points--;
-            this.endurance_text.text = this.stats.cell_endurance;
-            this.point_text.text = this.points;
+	           this.stats.cell_endurance++;
+	           this.points--;
+              this.endurance_text.text = this.stats.cell_endurance;
+              this.point_text.text = this.points;
           }else{
               this.incorrectFX.play();
           }
@@ -99,17 +99,18 @@ Menu.prototype = {
      
       this.enduranceDownButton = this.game.add.button(this.game.width- 700, this.game.height-250, 'attributeButton', function(){
         if(this.stats.cell_endurance  !==0){
-            this.attributeDownFX.play();
-	this.stats.cell_endurance--;
-	this.points++;
-           this.endurance_text.text = this.stats.cell_endurance;
-            this.point_text.text = this.points;
+              this.attributeDownFX.play();
+              this.stats.cell_endurance--;
+              this.points++;
+              this.endurance_text.text = this.stats.cell_endurance;
+              this.point_text.text = this.points;
           }else{
               this.incorrectFX.play();
           }
       }, this);
       this.enduranceDownButton.scale.setTo(4, -4);
      
+        
       this.speedUpButton = this.game.add.button(this.game.width- 500, this.game.height -450, 'attributeButton', function(){
           if(this.points !== 0){
               this.attributeUpFX.play();
@@ -135,7 +136,7 @@ Menu.prototype = {
           }
       }, this);
       this.speedDownButton.scale.setTo(4, -4);
-      
+          
       this.spawnUpButton = this.game.add.button(this.game.width- 300, this.game.height- 450, 'attributeButton', function(){
           if(this.points !==0){
               this.attributeUpFX.play();
@@ -176,12 +177,69 @@ Menu.prototype = {
       }
       
     }, this);
-    this.startButton.anchor.setTo(0.5,0.5);
-     
+    this.startButton.anchor.setTo(0.5,0.5);                       
     this.set_stats_screen.add(this.startButton);      
-  },
-   
-   
+   },
+   createCreditScreen: function(){
+      
+   },
+   showFactionChooseScreen: function(){
+      this.choose_sides.visible = true;
+      this.virus_button.visible = true;
+      this.wbc_button.visible = true;
+      this.VirusBackgroundImage.visible = true;
+      this.BodyBackgroundImage.visible = true;
+   },
+   showStatChooseScreen: function(){
+      this.set_stats_screen.visible = true;      
+      this.point_text.visible=true;      
+      this.endurance_text.visible =true;
+      this.enduranceWord.visible =true;      
+      this.speed_text.visible = true;
+      this.speedWord.visible = true;      
+      this.spawn_text.visible = true;
+      this.spawnWord.visible = true;
+      this.enduranceUpButton.visible =true;
+      this.enduranceDownButton.visible = true;
+      this.speedDownButton.visible = true;
+      this.speedUpButton.visible = true;
+      this.spawnDownButton.visible = true;
+      this.spawnUpButton.visible = true;
+      this.startButton.visible = true;            
+   },
+   showCreditScreen: function(){
+      
+   },
+   hideFactionChooseScreen: function(){
+      this.choose_sides.visible = false;
+      this.virus_button.visible = false;
+      this.wbc_button.visible = false;
+      this.VirusBackgroundImage.visible = false;
+      this.BodyBackgroundImage.visible = false;
+   },
+   hideStatChooseScreen: function(){
+      this.set_stats_screen.visible = false;      
+      this.point_text.visible=false;      
+      this.endurance_text.visible =false;
+      this.enduranceWord.visible =false;      
+      this.speed_text.visible = false;
+      this.speedWord.visible = false;      
+      this.spawn_text.visible = false;
+      this.spawnWord.visible = false;
+      this.enduranceUpButton.visible =false;
+      this.enduranceDownButton.visible = false;
+      this.speedDownButton.visible = false;
+      this.speedUpButton.visible = false;
+      this.spawnDownButton.visible = false;
+      this.spawnUpButton.visible = false;
+      this.startButton.visible = false;
+   },
+   hideCreditScreen: function(){
+      
+   },
+  update: function(){
+     
+  },        
   startClick: function() { 
       this.menuMusicFX.stop();
      // preserve the player stats.

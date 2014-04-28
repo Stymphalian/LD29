@@ -54,16 +54,16 @@ Play.prototype = {
        
          this.is_muted = false;
          this.mute_button = this.game.add.button(this.game.width- 30,5,"muteButton", function(){            
-            if( this.is_muted === true){
+            if( this.is_muted === false){
             //   this.BattleMusicFX.stop();
                this.BattleMusicFX.pause();
                this.mute_button.frame = 1;
-               this.is_muted = false;
+               this.is_muted = true;
             }else{
                //this.BattleMusicFX.play("",0.6,true);   
                this.BattleMusicFX.resume();
                this.mute_button.frame = 0;
-               this.is_muted = true;
+               this.is_muted = false;
             }            
          },this);         
 	 },

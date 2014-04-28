@@ -31,15 +31,50 @@ var Mother = function(game, x, y, frame,player) {
   this.events.onKilled.add(this.onKilled, this);  
       
    this.healthText = this.game.add.text(this.x,this.y - 16,"Health: " + this.endurance,{textSize:"6px", fill:"#fff"});
-   this.spawnText = this.game.add.text(this.x,this.y,"Rate: " + this.player.stats.spawn_rate,{textSize:"6px", fill:"#fff"});
+   //this.spawnText = this.game.add.text(this.x,this.y,"Rate: " + this.player.stats.spawn_rate,{textSize:"6px", fill:"#fff"});
    
-   //this.x -= 32/2;
-   //this.y -= 32/2;
+   
+   // health segments
+   this.health_group = this.game.add.group();
+   var num_segments = this.endurance/10;   
+   var x_pos = this.x;
+   var y_pos = this.y;   
+   var count = 0;
+   for( var i = 0;i < num_segments; ++i){
+      this.health_group.create.sprite(x_pos,y_pos,"healthSegment");
+      x_pos += 8;
+      count++;
+      if( count >= 10){
+         count = 0;
+         y_pos += 8;         
+      }
+   }   
+  
+  
+   
 };
 
 Mother.prototype = Object.create(Phaser.Sprite.prototype);
 Mother.prototype.constructor = Mother;
 
+Mother.prototype.draw_health_bar = function(){
+   var num_segments = this.endurance/10;   
+   var x_pos = this.x;
+   var y_pos = this.y;   
+   var count = 0;
+   var segment;
+   for( var i = 0;i < num_segments; ++i){
+      segment = this.health_group.getFirstDead();
+      segment.revive();
+      segment.setTo(x_pos, y_pos);
+      x_pos += 8;
+      count++;
+      if( count >= 10){
+         count = 0;
+         y_pos += 8;         
+      }      
+   }
+};
 Mother.prototype.update = function() {     
    if( this.current_count >= this.target_count ){
       // spawn unit.  
@@ -69,21 +104,13 @@ Mother.prototype.update = function() {
    }else{
       this.current_count++;  
    }   
-   
-   
-   //var num_segments = this.endurance/10;
-   //var x_pos = this.x;
-   //var y_pos = this.y; 
-   //for( var  i = 0; i < num_segments; ++i){
-   //   x_pos += 
-   //   
-   //}
-   //for( var i = 0; i < 10
+         
 };
 
 Mother.prototype.damage = function(amount){
  this.endurance -= amount;
- this.healthText.text = "Health: " + this.endurance;
+ //this.healthText.text = "Health: " + this.endurance;
+ this.draw_health_bar();
  if( this.endurance <= 0){
    this.kill();  
  }

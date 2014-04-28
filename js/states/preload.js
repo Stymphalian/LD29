@@ -32,8 +32,7 @@ Preload.prototype = {
      this.load.image("CellWall", "resources/cell_wall.png");     
       this.load.image("VirusBackground","resources/VirusBackground.png");
      this.load.audio("AttributeUpSound", "resources/AttributeUpSound.wav");
-      this.load.audio("AttributeDownSound","resources/AttributeDownSound.wav");
-      
+      this.load.audio("AttributeDownSound","resources/AttributeDownSound.wav");      
       this.load.audio("MenuClick","resources/MenuClick.wav");
       this.load.audio("CellCollision","resources/CellCollision.wav");
       this.load.audio("NodeSwitch","resources/NodeSwitch.wav");

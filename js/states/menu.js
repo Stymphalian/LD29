@@ -206,7 +206,21 @@ Menu.prototype = {
          this.hideCreditScreen();
          this.showStartScreen();
       },this);
-      this.back
+            
+      this.credit_text_group = this.game.add.group();      
+      var text_string;
+      text_string = this.game.add.text(40,100,"Credits",{fontSize:"8px",fill:"#fff"});
+      this.credit_text_group.add(text_string);
+      text_string = this.game.add.text(40,125,"Programmer : Jordan Yu",{fontSize:"8px",fill:"#fff"});
+      this.credit_text_group.add(text_string);
+      text_string = this.game.add.text(40,150,"Programmer,Artwork : Morgan Killinger",{fontSize:"8px",fill:"#fff"});
+      this.credit_text_group.add(text_string);
+      text_string = this.game.add.text(40,175,"Title Screen Artwork : Hannah Mathews",{fontSize:"8px",fill:"#fff"});
+      this.credit_text_group.add(text_string);
+      text_string = this.game.add.text(40,200,"Manager, Artwork : Ryan Stad",{fontSize:"8px",fill:"#fff"});
+      this.credit_text_group.add(text_string);
+      text_string = this.game.add.text(40,225,"Idea Generation : Graham Killinger",{fontSize:"8px",fill:"#fff"});
+      this.credit_text_group.add(text_string);            
    },
    showFactionChooseScreen: function(){
       this.choose_sides.visible = true;
@@ -234,6 +248,7 @@ Menu.prototype = {
    },
    showCreditScreen: function(){
       this.back_button.visible = true;
+      this.credit_text_group.visible = true;
    },
    hideFactionChooseScreen: function(){
       this.choose_sides.visible = false;
@@ -261,6 +276,7 @@ Menu.prototype = {
    },
    hideCreditScreen: function(){
       this.back_button.visible = false;
+      this.credit_text_group.visible = false;
    },
   update: function(){
      

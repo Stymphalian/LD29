@@ -131,3 +131,11 @@ global weapon.
 
 
 Testt test
+
+
+Play as the body or the infection and try to destroy the opposing mother-cell.
+
+How to Play:
+Choose a faction.
+Distribute attribute points for your faction.
+Manipulate the environment to direct your cells to their location.

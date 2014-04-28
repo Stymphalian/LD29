@@ -30,10 +30,10 @@ Play.prototype = {
 
 		  // add keyboard controls
         this.flapKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
-        this.flapKey.onDown.add(function(){                      
-           this.player.nodegrid.visible = !this.player.nodegrid.visible;
-           this.computer.nodegrid.visible = !this.computer.nodegrid.visible;             
-        }, this);
+        //this.flapKey.onDown.add(function(){                      
+        //   this.player.nodegrid.visible = !this.player.nodegrid.visible;
+        //   this.computer.nodegrid.visible = !this.computer.nodegrid.visible;             
+        //}, this);
        //this.player.nodegrid.visible = true;
        //this.computer.nodegrid.visible = true; 
 		  //this.flapKey.onDown.addOnce(this.startGame, this);

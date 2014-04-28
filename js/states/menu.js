@@ -191,7 +191,7 @@ Menu.prototype = {
              // do a tween on the number of points left.
           var bounce = this.game.add.tween(this.point_text);
           bounce.to({y: this.point_text.height + 10}, 1000, Phaser.Easing.Bounce.Out, true, 0,1,true);
-         this.startClick();
+         //this.startClick();
       }else{
           this.menuSoundFX.play();
          this.startClick();        
@@ -280,7 +280,7 @@ Menu.prototype = {
    },
   update: function(){
      
-  },        
+  },
   startClick: function() { 
       this.menuMusicFX.stop();
      // preserve the player stats.

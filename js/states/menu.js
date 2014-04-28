@@ -162,7 +162,6 @@ Menu.prototype = {
          this.startClick();
       }else{
           this.menuSoundFX.play();
-          this.menuMusicFX.stop();
          this.startClick();        
       }
       
@@ -173,7 +172,8 @@ Menu.prototype = {
   },
    
    
-  startClick: function() {         
+  startClick: function() { 
+      this.menuMusicFX.stop();
      // preserve the player stats.
      this.game.JORDAN_PLAYER_STATS = {
         spawn_rate: this.stats.spawn_rate,

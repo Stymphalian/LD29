@@ -53,7 +53,7 @@ Play.prototype = {
          this.BattleMusicFX.play("",.6,true);       
        
          this.is_muted = false;
-         this.mute_button = this.game.add.button(this.game.width- 50,50,"muteButton", function(){            
+         this.mute_button = this.game.add.button(this.game.width- 30,5,"muteButton", function(){            
             if( this.is_muted === true){
             //   this.BattleMusicFX.stop();
                this.BattleMusicFX.pause();
@@ -172,12 +172,19 @@ Play.prototype = {
 
 	 },
 	 deathHandler: function(player){
-       if( player.is_player){
+       this.game.JORDAN_GAME_END = {
+         faction: this.player.faction,
+          is_victorious: false
+       };
+       
+       if( player.is_player){          
           // show lose screen
          console.log("You lose");   
+          this.game.JORDAN_GAME_END.is_victorious = false;
        }else{
          //show victory screen  
           console.log("You win");   
+          this.game.JORDAN_GAME_END.is_victorious = true;
        }
        this.game.state.start("gameover");
     },

@@ -40,14 +40,14 @@ Preload.prototype = {
       this.load.audio("RemainingPoints","resources/RemainingPoints.wav");
       this.load.audio("MenuMusic","resources/MenuMusic.wav");
       this.load.audio("BattleMusic","resources/BattleMusic.wav");
-
-//
-//    this.load.audio('flap', 'assets/flap.wav');
-//    this.load.audio('pipeHit', 'assets/pipe-hit.wav');
-//    this.load.audio('groundHit', 'assets/ground-hit.wav');
-//    this.load.audio('score', 'assets/score.wav');
-//    this.load.audio('ouch', 'assets/ouch.wav');
-//
+          
+     this.load.image("start_screen_background", "resources/TitlePage.png");
+     this.load.image("virus_win_background","resources/VirusVictory.png");
+     this.load.image("virus_lose_background","resources/VirusLose.png");
+     this.load.image("wbc_win_background", "resources/BodyVictory.png");
+     this.load.image("wbc_lose_background","resources/BodyLose.png");
+     
+     this.load.spritesheet("muteButton","resources/SpeakerSpritesheet.png",28,28,2);
 
   },
   create: function() {

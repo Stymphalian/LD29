@@ -22,6 +22,22 @@ Gameover.prototype = {
      //this.game.add.text(36,36,"Gameover Text",{fontSize: "48px", fill:"#FFF"});    
      console.log("ending play");
      
+     var background_image;
+     if( this.game.JORDAN_GAME_END.faction === FACTION.VIRUS){
+        if( this.game.JORDAN_GAME_END.is_victorious === true){
+           background_image = "virus_win_background";
+        }else{
+           background_image = "virus_lose_background";
+        }
+     }else if(this.game.JORDAN_GAME_END.faction === FACTION.WBC){
+        if( this.game.JORDAN_GAME_END.is_victorious === true){
+           background_image = "wbc_win_background";
+        }else{
+           background_image = "wbc_lose_background";
+        }
+     }
+     
+     this.gameover_background = this.game.add.sprite(0,0,background_image);
      this.gameover_image = this.game.add.sprite(this.game.width/2, this.game.height/2,"gameover");        
      this.gameover_image.anchor.setTo(0.5,0.5);
   },
@@ -31,6 +47,7 @@ Gameover.prototype = {
   shutdown: function() {
      this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
      this.gameover_image.destroy();
+     this.gameover_background.destroy();
   },
   startGame: function() {
    this.game.state.start("menu");

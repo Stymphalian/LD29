@@ -19,19 +19,25 @@ Menu.prototype = {
       this.incorrectFX = this.game.add.audio("RemainingPoints");
       this.menuMusicFX = this.game.add.audio("MenuMusic",1,true);
       this.menuMusicFX.play("",1,true);
+     
+     
+     this.start_screen_background = this.game.add.image(0,0,"start_screen_background");          
+     
       // start game button
      this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
          this.gotoChooseSides();
          this.menuSoundFX.play();
      },this);
      this.play_button.anchor.setTo(0.5,0.5);    
-          
+     
+     
   },
   update: function(){
      
   },
    gotoChooseSides : function(){
       this.play_button.visible = false;
+      this.start_screen_background.visible = false;
       
       // start with choosing sides.
        this.VirusBackgroundImage = this.add.image(400, 0,"VirusBackground");
@@ -59,6 +65,7 @@ Menu.prototype = {
    },
   gotoStatScreen: function(){
     // for the set stats screen   
+      this.VirusBackgroundImage.visible = false;
      this.choose_sides.visible = false;
      
     //this.choose_sides.destroy();

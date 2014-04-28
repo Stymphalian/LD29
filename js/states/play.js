@@ -50,7 +50,22 @@ Play.prototype = {
          
          this.CellCollisionFX = this.game.add.audio("CellCollision",.1);
          this.BattleMusicFX = this.game.add.audio("BattleMusic", .6,true);
-         this.BattleMusicFX.play("",.6,true);
+         this.BattleMusicFX.play("",.6,true);       
+       
+         this.is_muted = false;
+         this.mute_button = this.game.add.button(this.game.width- 50,50,"muteButton", function(){            
+            if( this.is_muted === true){
+            //   this.BattleMusicFX.stop();
+               this.BattleMusicFX.pause();
+               this.mute_button.frame = 1;
+               this.is_muted = false;
+            }else{
+               //this.BattleMusicFX.play("",0.6,true);   
+               this.BattleMusicFX.resume();
+               this.mute_button.frame = 0;
+               this.is_muted = true;
+            }            
+         },this);         
 	 },
    place_walls : function(){
       this.walls = this.game.add.group();      
@@ -110,13 +125,18 @@ Play.prototype = {
 	 },
     
    cell_hit_cell: function(player_cell, computer_cell){
-       this.CellCollisionFX.play();
+      if( this.is_muted == false){
+       this.CellCollisionFX.play();         
+      }
+
       var temp = player_cell.endurance;
       player_cell.damage(computer_cell.endurance);
       computer_cell.damage(temp);   
    },
     mother_hit: function(mother, cell){
-        this.CellCollisionFX.play();
+       if( this.is_muted == false){
+         this.CellCollisionFX.play();          
+       }
        console.log("mother hit");
        
        mother.damage(cell.endurance); 

@@ -47,6 +47,7 @@ Gameover.prototype = {
   shutdown: function() {
      this.game.input.keyboard.removeKey(Phaser.Keyboard.SPACEBAR);
      this.gameover_image.destroy();
+     this.gameover_background.destroy();
   },
   startGame: function() {
    this.game.state.start("menu");

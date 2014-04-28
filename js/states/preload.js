@@ -44,8 +44,10 @@ Preload.prototype = {
      this.load.image("start_screen_background.png", "resources/start_screen_background.png");
      this.load.image("virus_win_background","resources/VirusVictory.png");
      this.load.image("virus_lose_background","resources/VirusLose.png");
-     this.load.image("wbc_win_background.png", "resources/BodyVictory.png");
-     this.load.image("wbc_lose_background.png","resources/BodyLose.png");
+     this.load.image("wbc_win_background", "resources/BodyVictory.png");
+     this.load.image("wbc_lose_background","resources/BodyLose.png");
+     
+     this.load.spritesheet("muteButton","resources/SpeakerSpritesheet.png",28,28,2);
 
   },
   create: function() {

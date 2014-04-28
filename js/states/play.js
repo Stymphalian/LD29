@@ -53,7 +53,7 @@ Play.prototype = {
          this.BattleMusicFX.play("",.6,true);       
        
          this.is_muted = false;
-         this.mute_button = this.game.add.button(this.game.width- 50,50,"muteButton", function(){            
+         this.mute_button = this.game.add.button(this.game.width- 30,5,"muteButton", function(){            
             if( this.is_muted === true){
             //   this.BattleMusicFX.stop();
                this.BattleMusicFX.pause();

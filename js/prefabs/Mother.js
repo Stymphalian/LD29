@@ -19,7 +19,7 @@ var Mother = function(game, x, y, frame,player) {
    this.current_count = 0;
    this.target_count = 60;  // 60 frames per second.. therefore , every 60 frames spawn a unit.
    this.target_count -= 2*this.player.stats.spawn_rate;
-   this.total_endurance = 200;
+   this.total_endurance = 24;
    this.endurance = this.total_endurance;
    this.prev_endurance = 0;
    
@@ -35,20 +35,14 @@ var Mother = function(game, x, y, frame,player) {
    
    // health segments
    this.health_group = this.game.add.group();
-   var num_segments = this.endurance/10;   
-   var x_pos = this.x + 25;
-   var y_pos = this.y;   
-   var count = 0;
-   for( var i = 0;i < num_segments; ++i){
-      this.health_group.create(x_pos,y_pos,"healthSegment");
-      x_pos += 8;
-      count++;
-      if( count >= 10){
-         count = 0;
-         y_pos += 8;         
-         x_pos = this.x + 25;
-      }
+   var num_segments = parseInt(this.endurance/10);      
+   if(this.endurance%10 > 0 ){
+    num_segments++;  
    }   
+   for( var i = 0;i < num_segments; ++i){
+      this.health_group.create(0,0,"healthSegments",9);      
+   }   
+   this.draw_health_bar();
      
 };
 
@@ -60,7 +54,11 @@ Mother.prototype.draw_health_bar = function(){
       segment.kill();      
    },this);
    
-   var num_segments = this.endurance/10;   
+   var num_segments = parseInt(this.endurance/10);   
+   var spare_health = this.endurance % 10;   
+   if( spare_health > 0 ){
+    num_segments++;  
+   }
    var x_pos = this.x +25;
    var y_pos = this.y;   
    var count = 0;
@@ -70,13 +68,18 @@ Mother.prototype.draw_health_bar = function(){
       segment.revive();
       segment.x = x_pos;
       segment.y = y_pos;
+      segment.frame = 9; // last frame is the full frame.
       x_pos += 8;
       count++;
       if( count >= 10){
          count = 0;
          y_pos += 8;    
          x_pos = this.x +25;
-      }      
+      }
+      
+      if( i == num_segments - 1 && spare_health > 0){
+         segment.frame = spare_health-1;
+      }
    }
 };
 

@@ -21,22 +21,43 @@ Menu.prototype = {
       this.createFactionChooseScreen();
       this.createStatChooseScreen();
       this.createCreditScreen();
+      this.createStartScreen();
      
       this.hideFactionChooseScreen();
       this.hideStatChooseScreen();
-      this.hideCreditScreen();     
+      this.hideCreditScreen(); 
+      this.hideStartScreen();
       this.menuMusicFX.play("",1,true);     
                     
-      this.start_screen_background = this.game.add.image(0,0,"start_screen_background");               
-       // start game button
-      this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
-         this.start_screen_background.visible = false;
-         this.play_button.visible = false;
+      // first screen to start is
+      this.showStartScreen();    
+  },
+   showStartScreen: function(){
+      this.start_screen_background.visible = true;
+      this.play_button.visible = true;
+      this.credit_button.visible = true;
+   },
+   hideStartScreen: function(){
+      this.start_screen_background.visible = false;
+      this.play_button.visible = false;
+      this.credit_button.visible =false;
+   },
+   createStartScreen: function(){
+       this.start_screen_background = this.game.add.image(0,0,"start_screen_background");               
+      
+        this.play_button = this.game.add.button(this.game.width/2,this.game.height/2,"playButton",function(){
+         this.hideStartScreen();         
          this.showFactionChooseScreen();   
          this.menuSoundFX.play();
+         },this);               
+      this.play_button.anchor.setTo(0.5,0.5);                              
+            
+      this.credit_button  = this.game.add.button(this.game.width/2, this.game.height/2 + 60,"creditButton", function(){
+         this.hideStartScreen();
+         this.showCreditScreen();
       },this);
-      this.play_button.anchor.setTo(0.5,0.5);                        
-  },
+      this.credit_button.anchor.setTo(0.5,0.5);
+   },
    createFactionChooseScreen: function(){
       // background images.
        this.VirusBackgroundImage = this.add.image(400, 0,"VirusBackground");
@@ -181,7 +202,11 @@ Menu.prototype = {
     this.set_stats_screen.add(this.startButton);      
    },
    createCreditScreen: function(){
-      
+      this.back_button = this.game.add.button(5, this.game.height - 60, "backButton",function(){
+         this.hideCreditScreen();
+         this.showStartScreen();
+      },this);
+      this.back
    },
    showFactionChooseScreen: function(){
       this.choose_sides.visible = true;
@@ -208,7 +233,7 @@ Menu.prototype = {
       this.startButton.visible = true;            
    },
    showCreditScreen: function(){
-      
+      this.back_button.visible = true;
    },
    hideFactionChooseScreen: function(){
       this.choose_sides.visible = false;
@@ -235,7 +260,7 @@ Menu.prototype = {
       this.startButton.visible = false;
    },
    hideCreditScreen: function(){
-      
+      this.back_button.visible = false;
    },
   update: function(){
      
@@ -248,8 +273,7 @@ Menu.prototype = {
         cell_endurance: this.stats.cell_endurance,
         cell_speed: this.stats.cell_speed,
         faction: this.faction
-     };
-     
+     };     
           
      //setup enemy statistics ( random )
      var enemy_faction;
@@ -276,7 +300,3 @@ Menu.prototype = {
     this.game.state.start('play');
   }
 };
-
-
-
-

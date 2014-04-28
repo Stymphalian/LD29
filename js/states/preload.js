@@ -49,7 +49,8 @@ Preload.prototype = {
       this.load.image("HumanSkeleton","resources/HumanSkeleton.png");
      
      this.load.spritesheet("muteButton","resources/SpeakerSpritesheet.png",28,28,2);
-
+     this.load.image("creditButton","resources/CreditButton.png");
+     this.load.image("backButton","resources/BackButton.png");
   },
   create: function() {
     this.asset.cropEnabled = false;

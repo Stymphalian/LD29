@@ -122,6 +122,7 @@ Play.prototype = {
        mother.damage(cell.endurance); 
        cell.kill();
        if( mother.endurance <= 0){
+           this.BattleMusicFX.stop();
          this.deathHandler(mother.player);
        }
        //mother.reset(this.game.world.randomX, this.game.world.randomY);

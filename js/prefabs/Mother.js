@@ -86,7 +86,7 @@ Mother.prototype.draw_health_bar = function(){
 Mother.prototype.update = function() {     
    if( this.current_count >= this.target_count ){
       // spawn unit.  
-      console.log("spawning cell?");
+      //console.log("spawning cell?");
       this.current_count = 0;
       
       var scale = 0.6;
@@ -131,6 +131,6 @@ Mother.prototype.onKilled = function() {
   this.animations.stop();
   //var duration = 90 / this.y * 300;
   //this.game.add.tween(this).to({angle: 90}, duration).start();
-  console.log('Mother killed');
-  console.log('Mother alive:', this.alive);
+  //console.log('Mother killed');
+  //console.log('Mother alive:', this.alive);
 };

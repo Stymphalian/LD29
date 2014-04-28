@@ -25,8 +25,8 @@ Play.prototype = {
        // add wall into the screen to make a more 'tunnel' liek appearance.
 //       this.place_walls();       
              
-		  this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
-		  console.log("Starting play");
+		  //this.startText = this.game.add.text(16, 16, 'Playing Game', { fontSize: '32px', fill: '#FFF' });
+		  //console.log("Starting play");
 
 		  // add keyboard controls
         this.flapKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
@@ -46,7 +46,7 @@ Play.prototype = {
 		  // keep the spacebar from propogating up to the browser
 		  this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
        
-       this.cell_count_text = this.game.add.text(50,50,"Count " + window.cell_count,{fontSize:"28px",fill:"#000"});
+       //this.cell_count_text = this.game.add.text(50,50,"Count " + window.cell_count,{fontSize:"28px",fill:"#000"});
          
          this.CellCollisionFX = this.game.add.audio("CellCollision",.1);
          this.BattleMusicFX = this.game.add.audio("BattleMusic", .6,true);
@@ -119,9 +119,8 @@ Play.prototype = {
        this.game.physics.arcade.collide(this.player.mother,this.computer.cells,this.mother_hit,null,this); 
        
        // computer cells colliding with player mother
-       this.game.physics.arcade.collide(this.computer.mother,this.player.cells,this.mother_hit,null,this);               
-       
-       this.cell_count_text.text = "Count "  + window.cell_count;
+       this.game.physics.arcade.collide(this.computer.mother,this.player.cells,this.mother_hit,null,this);                      
+       //this.cell_count_text.text = "Count "  + window.cell_count;
 	 },
     
    cell_hit_cell: function(player_cell, computer_cell){
@@ -137,7 +136,7 @@ Play.prototype = {
        if( this.is_muted == false){
          this.CellCollisionFX.play();          
        }
-       console.log("mother hit");
+       //console.log("mother hit");
        
        mother.damage(cell.endurance); 
        cell.kill();
@@ -152,7 +151,7 @@ Play.prototype = {
       if( cell.prev_target === node){ return;}
       var next_target = node.getNeighbourFromSendDirection();  
       if( next_target === null){
-         console.log("why null?");         
+         //console.log("why null?");         
       }      
       
       // TODO FIND BETTER WAY!!!!!!
@@ -179,11 +178,11 @@ Play.prototype = {
        
        if( player.is_player){          
           // show lose screen
-         console.log("You lose");   
+         //console.log("You lose");   
           this.game.JORDAN_GAME_END.is_victorious = false;
        }else{
          //show victory screen  
-          console.log("You win");   
+          //console.log("You win");   
           this.game.JORDAN_GAME_END.is_victorious = true;
        }
        this.game.state.start("gameover");

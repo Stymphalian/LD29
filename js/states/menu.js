@@ -213,13 +213,15 @@ Menu.prototype = {
       this.credit_text_group.add(text_string);
       text_string = this.game.add.text(40,125,"Programmer : Jordan Yu",{fontSize:"8px",fill:"#fff"});
       this.credit_text_group.add(text_string);
-      text_string = this.game.add.text(40,150,"Programmer,Artwork : Morgan Killinger",{fontSize:"8px",fill:"#fff"});
+      text_string = this.game.add.text(40,150,"Programmer,Artwork,SFX : Morgan Killinger",{fontSize:"8px",fill:"#fff"});
       this.credit_text_group.add(text_string);
       text_string = this.game.add.text(40,175,"Title Screen Artwork : Hannah Mathews",{fontSize:"8px",fill:"#fff"});
       this.credit_text_group.add(text_string);
-      text_string = this.game.add.text(40,200,"Manager, Artwork : Ryan Stad",{fontSize:"8px",fill:"#fff"});
+      text_string = this.game.add.text(40,200,"Manager, Artwork, Battle Music : Ryan Stad",{fontSize:"8px",fill:"#fff"});
       this.credit_text_group.add(text_string);
       text_string = this.game.add.text(40,225,"Idea Generation : Graham Killinger",{fontSize:"8px",fill:"#fff"});
+      this.credit_text_group.add(text_string);            
+      text_string = this.game.add.text(40,250,"Red Robin Waiter : Jamie (Thanks for the moral support!)",{fontSize:"8px",fill:"#fff"});
       this.credit_text_group.add(text_string);            
    },
    showFactionChooseScreen: function(){

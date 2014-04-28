@@ -19,7 +19,7 @@ var Mother = function(game, x, y, frame,player) {
    this.current_count = 0;
    this.target_count = 60;  // 60 frames per second.. therefore , every 60 frames spawn a unit.
    this.target_count -= 2*this.player.stats.spawn_rate;
-   this.total_endurance = 10;
+   this.total_endurance = 200;
    this.endurance = this.total_endurance;
    this.prev_endurance = 0;
    
@@ -30,9 +30,8 @@ var Mother = function(game, x, y, frame,player) {
   //this.body.checkCollision = false;
   this.events.onKilled.add(this.onKilled, this);  
       
-   this.healthText = this.game.add.text(this.x,this.y - 16,"Health: " + this.endurance,{textSize:"6px", fill:"#fff"});
-   //this.spawnText = this.game.add.text(this.x,this.y,"Rate: " + this.player.stats.spawn_rate,{textSize:"6px", fill:"#fff"});
-   
+   //this.healthText = this.game.add.text(this.x,this.y - 16,"Health: " + this.endurance,{textSize:"6px", fill:"#fff"});
+   //this.spawnText = this.game.add.text(this.x,this.y,"Rate: " + this.player.stats.spawn_rate,{textSize:"6px", fill:"#fff"});   
    
    // health segments
    this.health_group = this.game.add.group();
@@ -41,12 +40,13 @@ var Mother = function(game, x, y, frame,player) {
    var y_pos = this.y;   
    var count = 0;
    for( var i = 0;i < num_segments; ++i){
-      this.health_group.create.sprite(x_pos,y_pos,"healthSegment");
+      this.health_group.create(x_pos,y_pos,"healthSegment");
       x_pos += 8;
       count++;
       if( count >= 10){
          count = 0;
          y_pos += 8;         
+         x_pos = this.x;
       }
    }   
   
@@ -71,7 +71,8 @@ Mother.prototype.draw_health_bar = function(){
       count++;
       if( count >= 10){
          count = 0;
-         y_pos += 8;         
+         y_pos += 8;    
+         x_pos = this.x;
       }      
    }
 };

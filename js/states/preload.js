@@ -29,7 +29,8 @@ Preload.prototype = {
      this.load.image("wbcButton", "resources/wbcButton.png");     
      this.load.image("startButton", "resources/start-button.png");
      this.load.image("attributeButton", "resources/attributeButton.png");
-     this.load.image("CellWall", "resources/cell_wall.png");      
+     this.load.image("CellWall", "resources/cell_wall.png");     
+      this.load.image("VirusBackground","resources/VirusBackground.png");
      this.load.audio("AttributeUpSound", "resources/AttributeUpSound.wav");
       this.load.audio("AttributeDownSound","resources/AttributeDownSound.wav");
       

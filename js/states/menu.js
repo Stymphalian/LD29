@@ -34,8 +34,9 @@ Menu.prototype = {
       this.play_button.visible = false;
       
       // start with choosing sides.
+       this.VirusBackgroundImage = this.add.image(400, 0,"VirusBackground");
     this.choose_sides = this.game.add.group();
-    this.virus_button = this.game.add.button(this.game.width/2,0,'virusButton',function(){
+    this.virus_button = this.game.add.button(450,350,'virusButton',function(){
       this.faction = FACTION.VIRUS;
         this.menuSoundFX.play();
       this.gotoStatScreen(); 
@@ -48,8 +49,8 @@ Menu.prototype = {
       
       this.wbc_button.width = this.game.width/2;
       this.wbc_button.height = this.game.height;
-      this.virus_button.width = this.game.width/2;
-      this.virus_button.height = this.game.height;      
+      this.virus_button.width = 300;
+      this.virus_button.height = 100;      
       //this.wbc_button.anchor.setTo(0.5,0.5);
       //this.virus_button.anchor.setTo(0.5,0.5);
       

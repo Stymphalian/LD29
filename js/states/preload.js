@@ -46,6 +46,7 @@ Preload.prototype = {
      this.load.image("virus_lose_background","resources/VirusLose.png");
      this.load.image("wbc_win_background", "resources/BodyVictory.png");
      this.load.image("wbc_lose_background","resources/BodyLose.png");
+      this.load.image("HumanSkeleton","resources/HumanSkeleton.png");
      
      this.load.spritesheet("muteButton","resources/SpeakerSpritesheet.png",28,28,2);
 

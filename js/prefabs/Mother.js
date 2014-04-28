@@ -29,11 +29,9 @@ var Mother = function(game, x, y, frame,player) {
   this.body.immovable = true;
   //this.body.checkCollision = false;
   this.events.onKilled.add(this.onKilled, this);  
-   
-   var rate = parseFloat(this.target_count)/60;
-   rate = parseFloat(1/rate);   
+      
    this.healthText = this.game.add.text(this.x,this.y - 16,"Health: " + this.endurance,{textSize:"6px", fill:"#fff"});
-   this.spawnText = this.game.add.text(this.x,this.y,"Rate: " + rate,{textSize:"6px", fill:"#fff"});
+   this.spawnText = this.game.add.text(this.x,this.y,"Rate: " + this.player.stats.spawn_rate,{textSize:"6px", fill:"#fff"});
    
    //this.x -= 32/2;
    //this.y -= 32/2;

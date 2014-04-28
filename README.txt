@@ -119,10 +119,11 @@ cell spawn rate.
 attributes effects on cells [x]
 cell fighting.[x]
 background images.
-walls on game board.
-sounds (ALL)
-title screen 
-credit screen
+//walls on game board.
+sounds (ALL) [x]
+title screen.
+credit screen.
+game over screen.
 
 extra:
 global weapon.

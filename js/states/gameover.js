@@ -20,7 +20,7 @@ Gameover.prototype = {
      
      
      //this.game.add.text(36,36,"Gameover Text",{fontSize: "48px", fill:"#FFF"});    
-     console.log("ending play");
+     //console.log("ending play");
      
      var background_image;
      if( this.game.JORDAN_GAME_END.faction === FACTION.VIRUS){
